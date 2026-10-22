@@ -1,0 +1,229 @@
+{
+ "adaptive_distinct_selections": 3,
+ "adaptive_versus_control": {
+  "fixed": {
+   "future": {
+    "losses": 2,
+    "mean": 0.0625,
+    "n": 16,
+    "p_one_sided": 0.5,
+    "ties": 11,
+    "wins": 3
+   },
+   "total": {
+    "losses": 2,
+    "mean": 0.0625,
+    "n": 16,
+    "p_one_sided": 0.5,
+    "ties": 11,
+    "wins": 3
+   }
+  },
+  "fixed_all": {
+   "future": {
+    "losses": 6,
+    "mean": 0.09375,
+    "n": 16,
+    "p_one_sided": 0.38037109375,
+    "ties": 4,
+    "wins": 6
+   },
+   "total": {
+    "losses": 6,
+    "mean": 0.09375,
+    "n": 16,
+    "p_one_sided": 0.377685546875,
+    "ties": 3,
+    "wins": 7
+   }
+  },
+  "random": {
+   "future": {
+    "losses": 7,
+    "mean": 0.15625,
+    "n": 16,
+    "p_one_sided": 0.295654296875,
+    "ties": 2,
+    "wins": 7
+   },
+   "total": {
+    "losses": 7,
+    "mean": 0.125,
+    "n": 16,
+    "p_one_sided": 0.3475341796875,
+    "ties": 2,
+    "wins": 7
+   }
+  }
+ },
+ "all_horizons_complete": true,
+ "audit": {
+  "audited_cells": 160,
+  "audited_source_blocks": 16,
+  "audited_targets": 963,
+  "confirmation_supported": false,
+  "independently_replayed_admission_events": 4174478,
+  "limitation": "Same declared finite corpus and sign-exchangeability assumptions; not universal optimality",
+  "producer_conclusion": "no_confirmed_adaptive_superiority",
+  "promotions": 2846,
+  "residuals_hits_certificates_permissions_and_statistics_recomputed": true,
+  "seal_sha256": "eb73763e8a0730126498918edcd9bd58876497c1f150e01b3ddfda2288c26080",
+  "status": "passed"
+ },
+ "confirmation_supported": false,
+ "continuations": 160,
+ "held_out_targets": 963,
+ "holm_adjusted_p": {
+  "fixed": 1.0,
+  "fixed_all": 1.0,
+  "random": 1.0
+ },
+ "interpretation": [
+  "Fixed is the reproducible working configuration, not a proven optimal rule set or universal winner.",
+  "The registered adaptive-superiority criterion did not pass; this does not establish equivalence.",
+  "The 160 continuations form 16 paired source blocks, not 160 independent theories.",
+  "The held-out corpus shares Metamath ancestry with development data; it is not all of Metamath or ZFC.",
+  "These are future-utility outcomes, distinct from initial coverage and descriptive network metrics."
+ ],
+ "method_means": [
+  {
+   "continuations": 32,
+   "future": {
+    "exact_new_residual_mean": 1.03125,
+    "new_residual_mean": 1.3125,
+    "normalised_auc_mean": 0.0014080636663492889,
+    "residual_fraction_mean": 0.001428182807399347
+   },
+   "initial_coverage_mean": 25,
+   "method": "core",
+   "source_blocks": 16,
+   "total": {
+    "exact_new_residual_mean": 1.0625,
+    "new_residual_mean": 1.34375,
+    "normalised_auc_mean": 0.001312321524377336,
+    "residual_fraction_mean": 0.0014621871599564745
+   }
+  },
+  {
+   "continuations": 32,
+   "future": {
+    "exact_new_residual_mean": 1.375,
+    "new_residual_mean": 1.59375,
+    "normalised_auc_mean": 0.0016825071465814306,
+    "residual_fraction_mean": 0.001734221980413493
+   },
+   "initial_coverage_mean": 29,
+   "method": "fixed",
+   "source_blocks": 16,
+   "total": {
+    "exact_new_residual_mean": 1.375,
+    "new_residual_mean": 1.625,
+    "normalised_auc_mean": 0.001569355435406844,
+    "residual_fraction_mean": 0.0017682263329706202
+   }
+  },
+  {
+   "continuations": 32,
+   "future": {
+    "exact_new_residual_mean": 1.15625,
+    "new_residual_mean": 1.5,
+    "normalised_auc_mean": 0.001603075310573081,
+    "residual_fraction_mean": 0.001632208922742111
+   },
+   "initial_coverage_mean": 26.375,
+   "method": "random",
+   "source_blocks": 16,
+   "total": {
+    "exact_new_residual_mean": 1.1875,
+    "new_residual_mean": 1.5625,
+    "normalised_auc_mean": 0.0014896796295036832,
+    "residual_fraction_mean": 0.0017002176278563656
+   }
+  },
+  {
+   "continuations": 32,
+   "future": {
+    "exact_new_residual_mean": 1.34375,
+    "new_residual_mean": 1.65625,
+    "normalised_auc_mean": 0.0017552638329706204,
+    "residual_fraction_mean": 0.0018022306855277476
+   },
+   "initial_coverage_mean": 27.875,
+   "method": "adaptive",
+   "source_blocks": 16,
+   "total": {
+    "exact_new_residual_mean": 1.34375,
+    "new_residual_mean": 1.6875,
+    "normalised_auc_mean": 0.0016415597569822266,
+    "residual_fraction_mean": 0.001836235038084875
+   }
+  },
+  {
+   "continuations": 32,
+   "future": {
+    "exact_new_residual_mean": 1.3125,
+    "new_residual_mean": 1.5625,
+    "normalised_auc_mean": 0.0015852575693688807,
+    "residual_fraction_mean": 0.0017002176278563656
+   },
+   "initial_coverage_mean": 44,
+   "method": "fixed_all",
+   "source_blocks": 16,
+   "total": {
+    "exact_new_residual_mean": 1.3125,
+    "new_residual_mean": 1.59375,
+    "normalised_auc_mean": 0.0014351659401069996,
+    "residual_fraction_mean": 0.001734221980413493
+   }
+  }
+ ],
+ "methods": [
+  "core",
+  "fixed",
+  "random",
+  "adaptive",
+  "fixed_all"
+ ],
+ "policies": [
+  "uniform",
+  "mixed"
+ ],
+ "protocol": {
+  "fixed_control": "Lock a quota-matched set ranked on old development DAGs; also retain the whole fixed extended grammar and a random quota control. All arms receive the COMPLETE <=2-MP set and identical inherited compressed core.",
+  "formula_size": 160,
+  "future_cpu": 60.0,
+  "inference": "16 paired source RNG blocks, not independent axiom systems; exact one-sided sign-flip tests assume exchangeable paired signs. Intersection of future and total tests (max p), Holm across three controls, alpha .05. No optional stopping.",
+  "maximum_mp": 3,
+  "primary": "For each source, take the common held-out residual uncovered by EVERY initial arm; average two neutral policies; count newly covered residual targets by 60 growth CPU-s. Only future performance, not initial coverage or build output, determines success.",
+  "primary_total": "Repeat the SAME endpoint at 90 total cold CPU-s, including newly measured common source build/read, catalogue cold synthesis/verification (charged in full, not amortised), method preparation/selection/merge/compression/certification and continuation setup. Inherited historical library/model training remains excluded and disclosed.",
+  "proof_height": 256,
+  "quota": 12,
+  "quota_scope": "Quota limits added >=3-MP catalogue outputs in two matched controls and adaptive, NOT total skeleton size or compression threshold. Positive-marginal upper coding remains unlimited.",
+  "representation": "The neutral mixed continuer includes the existing ID-dependent frontier sampler. This compares delivered interfaces under that fixed engine, not a representation-invariant semantic quality functional.",
+  "source_attempts": 1500,
+  "source_initial_nodes": 2708,
+  "timing_scope": "Measured operational parent+verifier-child CPU, not wall time or all historical research costs. Interpreter startup, filesystem wall waits, offline held-out observer, terminal bulk future export and audit remain separately reported; never claim whole-job or from-axioms ATP acceleration.",
+  "total_cpu": 90.0
+ },
+ "recommended_configuration": "fixed",
+ "schema": "article1-compact-holdout/v1",
+ "source_blocks": 16,
+ "status": "no_confirmed_adaptive_superiority",
+ "success_rule": {
+  "adaptive_selection_distinct_at_least": 2,
+  "adjusted_p_less_than": 0.05,
+  "all_certificates_and_permission_audit_required": true,
+  "all_horizons_required": true,
+  "all_planned_cells_required": true,
+  "all_three_controls_must_pass": true,
+  "for_both_endpoints": true,
+  "mean_extra_targets_at_least": 1.0
+ },
+ "technical_amendment": {
+  "authorised_change": "Recompute imported descendant axiom origins from the actual remapped destination parents; do not weaken any proof check.",
+  "interpretation": "A disclosed replacement after technical failure before first target scoring, not an independent replication or a new held-out corpus.",
+  "kind": "disclosed_pre_scoring_technical_repair",
+  "previous_seal_sha256": "13d60bb2af56b5e33681e26ca334e0925f7360fcd5a7b839a1027b451db26407",
+  "previous_targets_opened": false
+ }
+}

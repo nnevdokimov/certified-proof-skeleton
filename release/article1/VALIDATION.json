@@ -1,0 +1,60 @@
+{
+  "scope": "Main-experiment source-release checks, not a repeat of the scientific experiment",
+  "date": "2026-10-22",
+  "branch": "main",
+  "clean_source_export": true,
+  "release_files": 67,
+  "main_workflow_python_files": 46,
+  "main_workflow_code_unchanged_from": "28e394d439c6f2cd57aef31d1fe547ff226117b2",
+  "retained_markdown_files": 3,
+  "shell_files": 0,
+  "historical_output_and_manuscript_trees_absent_from_test_checkout": true,
+  "python": "CPython 3.13.3",
+  "test_environment_dependencies": {
+    "numpy": "2.4.1",
+    "scipy": "1.17.0",
+    "networkx": "3.6.1",
+    "pytest": "9.0.2"
+  },
+  "dependency_note": "Existing installed environment, with isolated Python (-I) and no scientific inputs copied into the clean checkout; not a fresh dependency installation or original-experiment environment lock.",
+  "self_contained_regression_checks": {
+    "command": "python -I -m pytest -q",
+    "passed": 44,
+    "integration_cases_explicitly_deselected": 40,
+    "clean_checkout_and_research_worktree": "both passed",
+    "selection": "pytest.ini enumerates seven maintained test files; tests/conftest.py marks archived-input cases as integration",
+    "files": [
+      "tests/test_compression_overlay.py",
+      "tests/test_deferred_queue.py",
+      "tests/test_metamath_native.py",
+      "tests/test_native_cumulative_policy.py",
+      "tests/test_native_holdout.py",
+      "tests/test_native_quality_evaluation.py",
+      "tests/test_native_rule_synthesis.py"
+    ],
+    "integration_execution": false,
+    "new_tests": "Three deterministic deferred-queue regression cases extracted from the historical queue test file; no generation driver."
+  },
+  "all_tests_collection": {
+    "collected": 84,
+    "status": "passed; collection only, not a full integration run"
+  },
+  "entrypoint_import_and_help": {
+    "status": "passed",
+    "scripts": [
+      "scripts/run_native_holdout.py",
+      "scripts/audit_native_holdout.py",
+      "scripts/metamath_native_skeleton.py"
+    ],
+    "invocation": "python -I <script> --help"
+  },
+  "python_files_parsed": 55,
+  "markdown_relative_links": "all resolve",
+  "compact_results_reexport": "Three compact JSON files byte-for-byte unchanged; re-export check against the original checked local sources passed (77,795 bytes).",
+  "corpus_commitments": "Both original corpus commitments retained byte-for-byte, including the pre-scoring technical amendment.",
+  "local_archive": "507 previously tracked files excluded from the minimal release; all existing local bytes preserved.",
+  "new_scientific_search_or_evaluation": false,
+  "new_cluster_jobs": false,
+  "raw_data_archive_complete": false,
+  "manuscript_published": false
+}
