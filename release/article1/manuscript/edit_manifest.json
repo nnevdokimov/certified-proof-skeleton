@@ -1,11 +1,11 @@
 {
   "source": "original_full.tex",
   "source_sha256": "d4a9b0d92879dbe391a0f3e63a73c5b0e3d8d1d16beecf6e2856a3e53802c316",
-  "operation": "Deletion-only shortening; retained prose is not paraphrased",
-  "main_deletion_only_before_numbering": true,
+  "operation": "Deletion-only base shortening followed by approved targeted consistency corrections",
+  "base_main_deletion_only_before_numbering": true,
   "main_pre_numbering_sha256": "025ad4b52e9533d37f7c220ad710a387bb12943eda8e7535ba6ac4932a050ef4",
-  "main_sha256": "78e504eede079dd5d19d464bdc60aa6aabb7057b28b934d5597a7462748eb30e",
-  "support_sha256": "d9f1b2a114ab1240d7a53f99a30b28bca4b41ae38bae3dd302e1e29533633077",
+  "main_sha256": "071ae96c8788c789136cc914eef6c79f39407bf416f4d0d99694aa791ef27a42",
+  "support_sha256": "637a02781267ca9611542372fe7895ed5a4da2c7212f57708f9ac0203d37b459",
   "main_section_number_map": {
     "2.1": "2.1",
     "2.2": "2.2",
@@ -55,9 +55,77 @@
     "12": "S1",
     "14": "S2"
   },
+  "appendix_number_map": {
+    "A": "A",
+    "B": "B",
+    "G": "C",
+    "I": "D",
+    "J": "E",
+    "K": "F",
+    "L": "G",
+    "N": "H"
+  },
+  "appendix_subsection_exception": {
+    "K.6": "F.5"
+  },
+  "targeted_revisions": [
+    {
+      "reason": "Remove the passive-library emphasis from the abstract",
+      "before": "The selector measures how fragments shorten the expanded proof forest and accounts for definitions and overlaps; search need not activate stored fragments.",
+      "after": "The selector measures how fragments shorten the expanded proof forest and accounts for definitions and overlaps."
+    },
+    {
+      "reason": "Align the introduction with the retained continuation and native tests",
+      "before": "The present paper addresses the direct problem by generating a semantic skeleton of mathematics under a fixed computational budget. In particular, it examines how activating library fragments affects continuous forward growth from axioms. We assess three independent outcomes: (1) how many new canonical formulae the generator discovers, (2) how much reuse costs, and (3) how many results match human statements.",
+      "after": "The present paper addresses the direct problem by generating a semantic skeleton of mathematics under a fixed computational budget. We evaluate premise-pair selection with deferred replay and compare structural rule repertoires in neutral continuation tests. We measure new canonical formulae, resource costs, and additional coverage of a common initially uncovered set of human statements."
+    },
+    {
+      "reason": "Describe construction rather than the removed active/passive comparison",
+      "before": "At the designated epochs, select a library from the preceding proof forest. In the active variant, apply bounded retention to its conclusions; in the passive variant, leave search state unchanged.",
+      "after": "At the designated epochs, select a library from the preceding proof forest. Apply bounded retention to selected conclusions within ordinary premise slots while preserving their archived certificates."
+    },
+    {
+      "reason": "Retain corpus provenance without the removed development protocol",
+      "before": "A development comparison uses six new states of the random number generator (RNG) for source construction, two neutral continuers, and nested horizons of one, three, and eight growth CPU-seconds. Its reference contains 919 unique compatible closed native statements, 34 of which axiom instances already cover. That reference previously informed development and cannot supply an independent holdout. We retain it to diagnose the mechanism and motivate the frozen test, not to confirm the adaptive claim.",
+      "after": "Our earlier development reference contains 919 unique compatible closed native statements; axiom instances already cover 34. This reference informed method development. We use it to identify overlap with the held-out corpus."
+    },
+    {
+      "reason": "Define RNG at its first retained occurrence",
+      "before": "The protocol fixes 16 new source RNG states, five arms, and two neutral continuers",
+      "after": "The protocol fixes 16 new source random number generator (RNG) states, five arms, and two neutral continuers"
+    },
+    {
+      "reason": "Remove the orphaned exact-match readout",
+      "before": "Neither measure substitutes for the other, and exact matches remain a separate readout.",
+      "after": "Neither measure substitutes for the other."
+    },
+    {
+      "reason": "Align the related-work comparison with the retained coverage metric",
+      "before": "We test neutral direct continuation and exact matches to human statements.",
+      "after": "We test neutral direct continuation and additional coverage of human statements."
+    },
+    {
+      "reason": "Remove the term tied to discarded prospective-lease pilots",
+      "before": "prospective leases whose costs we measure",
+      "after": "bounded retention leases whose costs we measure"
+    },
+    {
+      "reason": "Distinguish development diagnostics from the locked comparison",
+      "before": "After a run, we separately measure how many human statements the results cover; this diagnostic does not supply an independent holdout.",
+      "after": "Development diagnostics measure human-statement coverage after a run; a separate locked comparison evaluates a previously unscored target pool."
+    }
+  ],
+  "restored": {
+    "original_section": "J.4",
+    "destination_section": "E.3",
+    "text_sha256": "edd3578423fd6b3fb9f5a15d1fddede2d2123df81e1d106cf78255f7c724e08a",
+    "text": "The first-proof native graphs attain maximum core number two, the human named graph attains six, and the all-inference graph attains 190. These values do not rank mathematical depth. In a DAG that records only first proofs through binary modus ponens and unary generalisation, every derived vertex cites at most two earlier neighbours.\n\n\\textbf{Proof of the format bound.} Consider any nonempty induced subgraph and choose its last vertex in a topological order. It cannot point to another vertex in that subgraph, and at most two premise neighbours point to it. Every induced subgraph therefore contains a vertex of degree at most two, which bounds degeneracy and maximum core number by two. Named human steps can cite many premises, and the cyclic all-inference graph does not satisfy this first-proof DAG condition.\n\n"
+  },
   "technical_exceptions": [
     "Mechanical heading and cross-reference renumbering",
-    "Supporting-PDF subtitle and S-prefixed object counters"
+    "Supporting-PDF subtitle and S-prefixed object counters",
+    "Continuous appendix lettering, labels, and cross-references",
+    "Keep the locked-comparison table together; set main bibliography spacing to 0.7em"
   ],
   "preserved": [
     "Original full source unchanged",
@@ -65,10 +133,10 @@
     "144-source continuation results",
     "16-source 963-target negative adaptive comparison",
     "Main network comparison",
-    "Technical amendment disclosure in supporting Appendix L",
-    "Author list, abstract, funding, and availability statement"
+    "Technical amendment disclosure in supporting Appendix G",
+    "Author list, funding, and availability statement"
   ],
-  "removed_characters_main_before_numbering": 258470,
+  "removed_characters_base_main_before_numbering": 258470,
   "changes": [
     {
       "document": "main",
@@ -237,6 +305,13 @@
       "removed_characters": 191,
       "removed_sha256": "bda74f4c483dd735e2a573f5c61909f5fbc8dd3739ac9e1c97859d5e89c18742",
       "original_start_line": 891
+    },
+    {
+      "document": "main",
+      "reason": "Remove the unused exact-match metric M_b",
+      "removed_characters": 197,
+      "removed_sha256": "6d568ab9ce9e4abd87cb4df65e376bc517dde799fd7173bd248fb4132dacc6e3",
+      "original_start_line": 170
     },
     {
       "document": "support",

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reproduce a deletion-only editorial cut, with mechanical reference renumbering.
+"""Reproduce the editorial cut and the approved consistency corrections.
 
 No scientific run, model fitting, or result recalculation occurs here.
 The untouched input is original_full.tex beside this script.
@@ -12,6 +12,7 @@ import re
 ROOT = Path(__file__).resolve().parent
 SOURCE = (ROOT / "original_full.tex").read_text()
 changes = []
+revisions = []
 
 
 def sha(text):
@@ -46,6 +47,12 @@ def is_subsequence(short, full):
     return all(any(x == char for x in cursor) for char in short)
 
 
+def revise(text, before, after, reason):
+    assert text.count(before) == 1, (reason, text.count(before))
+    revisions.append({"reason": reason, "before": before, "after": after})
+    return text.replace(before, after, 1)
+
+
 APP_A = r"\section*{Appendix A."
 DECL = r"\section*{Statements and Declarations}"
 BIB = r"\begin{thebibliography}"
@@ -76,8 +83,47 @@ main = drop_paragraph(main, r"\textbf{Computing resources.}", "Remove historical
 assert is_subsequence(main, SOURCE), "Main text must contain deletions only before numbering"
 main_before_numbering = main
 
-# Supporting material retains original appendix identifiers, so references in
-# the manuscript still lead to the same proofs and protocol sections.
+# Approved on 10 November: align the shortened narrative with the experiments
+# that remain. These small replacements supersede the initial deletion-only
+# restriction; they neither restore development results nor change measurements.
+main = revise(main,
+    "The selector measures how fragments shorten the expanded proof forest and accounts for definitions and overlaps; search need not activate stored fragments.",
+    "The selector measures how fragments shorten the expanded proof forest and accounts for definitions and overlaps.",
+    "Remove the passive-library emphasis from the abstract")
+main = revise(main,
+    "The present paper addresses the direct problem by generating a semantic skeleton of mathematics under a fixed computational budget. In particular, it examines how activating library fragments affects continuous forward growth from axioms. We assess three independent outcomes: (1) how many new canonical formulae the generator discovers, (2) how much reuse costs, and (3) how many results match human statements.",
+    "The present paper addresses the direct problem by generating a semantic skeleton of mathematics under a fixed computational budget. We evaluate premise-pair selection with deferred replay and compare structural rule repertoires in neutral continuation tests. We measure new canonical formulae, resource costs, and additional coverage of a common initially uncovered set of human statements.",
+    "Align the introduction with the retained continuation and native tests")
+main = revise(main,
+    "At the designated epochs, select a library from the preceding proof forest. In the active variant, apply bounded retention to its conclusions; in the passive variant, leave search state unchanged.",
+    "At the designated epochs, select a library from the preceding proof forest. Apply bounded retention to selected conclusions within ordinary premise slots while preserving their archived certificates.",
+    "Describe construction rather than the removed active/passive comparison")
+main = revise(main,
+    "A development comparison uses six new states of the random number generator (RNG) for source construction, two neutral continuers, and nested horizons of one, three, and eight growth CPU-seconds. Its reference contains 919 unique compatible closed native statements, 34 of which axiom instances already cover. That reference previously informed development and cannot supply an independent holdout. We retain it to diagnose the mechanism and motivate the frozen test, not to confirm the adaptive claim.",
+    "Our earlier development reference contains 919 unique compatible closed native statements; axiom instances already cover 34. This reference informed method development. We use it to identify overlap with the held-out corpus.",
+    "Retain corpus provenance without the removed development protocol")
+main = revise(main,
+    "The protocol fixes 16 new source RNG states, five arms, and two neutral continuers",
+    "The protocol fixes 16 new source random number generator (RNG) states, five arms, and two neutral continuers",
+    "Define RNG at its first retained occurrence")
+main = cut(main, r"An external set \(T\) supplies", "The later native tests", "Remove the unused exact-match metric M_b")
+main = revise(main,
+    "Neither measure substitutes for the other, and exact matches remain a separate readout.",
+    "Neither measure substitutes for the other.",
+    "Remove the orphaned exact-match readout")
+main = revise(main,
+    "We test neutral direct continuation and exact matches to human statements.",
+    "We test neutral direct continuation and additional coverage of human statements.",
+    "Align the related-work comparison with the retained coverage metric")
+main = revise(main, "prospective leases whose costs we measure", "bounded retention leases whose costs we measure",
+    "Remove the term tied to discarded prospective-lease pilots")
+main = revise(main,
+    "After a run, we separately measure how many human statements the results cover; this diagnostic does not supply an independent holdout.",
+    "Development diagnostics measure human-statement coverage after a run; a separate locked comparison evaluates a previously unscored target pool.",
+    "Distinguish development diagnostics from the locked comparison")
+
+# First select supporting material in its original order; visible appendix
+# identifiers and references are subsequently mapped in one simultaneous pass.
 header = SOURCE[:SOURCE.index(r"\section*{1. Introduction}")]
 abstract = between(header, r"\abstract{", r"\keywords{")
 header = header.replace(abstract, "")
@@ -110,8 +156,12 @@ support = cut(support, "The replacement package,", "It retains the same unopened
 support = cut(support, "Evaluation receipt SHA-256:", "The complete registered report remains available", "Remove final receipt hashes", "support")
 support = drop_paragraph(support, r"The package \path{output/article1_adaptive_revision", "Remove local network package path and editorial gate", "support")
 
-# Visible numbers change mechanically; wording, mathematical values, captions,
-# author details, and retained table cells are not edited.
+format_bound = between(SOURCE, "The first-proof native graphs attain maximum core number two", r"\subsection*{J.5.")
+support = support.replace(r"\section*{Appendix K.", "\n\n" + format_bound + r"\section*{Appendix K.", 1)
+assert support.count(format_bound) == 1
+
+# Visible numbers change mechanically. Measurements, table cells, captions,
+# and author details remain unchanged.
 heading_map = {}
 sub_counts = {}
 for match in re.finditer(r"\\subsection\*\{(\d+)\.(\d+) ([^\n]*)\}", main):
@@ -150,6 +200,40 @@ support = renumber_objects(renumber_sections(support), main_tables | support_tab
 support = support.replace(r"\begin{document}", r"\renewcommand{\thetable}{S\arabic{table}}" + "\n" +
                           r"\renewcommand{\thefigure}{S\arabic{figure}}" + "\n" + r"\begin{document}")
 
+appendix_map = dict(zip("ABGIJKLN", "ABCDEFGH"))
+
+
+def renumber_appendices(text):
+    # One pass prevents old G -> C from also changing new G (old L).
+    def token(match):
+        prefix = match[1] or ""
+        old = match[2] or match[4]
+        suffix = (match[3] or "") if match[1] else "." + match[5]
+        if old == "K" and suffix == ".6":
+            suffix = ".5"
+        return prefix + appendix_map.get(old, old) + suffix
+
+    text = re.sub(r"\b(?:(Appendix )([A-N])(\.\d+(?:\.\d+)*)?|([A-N])\.(\d+(?:\.\d+)*))", token, text)
+
+    def label(match):
+        prefix, old, rest = match[1], match[2], match[3]
+        if old == "k" and rest.startswith("6."):
+            rest = "5." + rest[2:]
+        return r"\label{" + prefix + appendix_map.get(old.upper(), old.upper()).lower() + "." + rest + "}"
+
+    return re.sub(r"\\label\{((?:appendix-)?)([a-n])\.([^}]*)\}", label, text)
+
+
+main = renumber_appendices(main)
+support = renumber_appendices(support)
+
+# Keep the short locked-comparison table together and avoid a final page that
+# contains only three references. This changes spacing, not manuscript content.
+main = main.replace(r"\usepackage{placeins}", r"\usepackage{placeins}" + "\n" + r"\usepackage{needspace}")
+table_start = main.rindex(r"\begingroup", 0, main.index(r"\label{tab:5}"))
+main = main[:table_start] + r"\Needspace{19\baselineskip}" + "\n" + main[table_start:]
+main = main.replace(BIB, r"\setlength{\bibsep}{0.7em}" + "\n" + BIB, 1)
+
 
 def prune_bibliography(text, document):
     begin = text.index(BIB)
@@ -170,24 +254,30 @@ support = prune_bibliography(support, "support")
 (ROOT / "supporting_appendices.tex").write_text(support)
 manifest = {
     "source": "original_full.tex", "source_sha256": sha(SOURCE),
-    "operation": "Deletion-only shortening; retained prose is not paraphrased",
-    "main_deletion_only_before_numbering": is_subsequence(main_before_numbering, SOURCE),
+    "operation": "Deletion-only base shortening followed by approved targeted consistency corrections",
+    "base_main_deletion_only_before_numbering": is_subsequence(main_before_numbering, SOURCE),
     "main_pre_numbering_sha256": sha(main_before_numbering),
     "main_sha256": sha(main), "support_sha256": sha(support),
     "main_section_number_map": heading_map, "main_table_number_map": main_tables,
     "main_figure_number_map": main_figures, "support_table_number_map": support_tables,
     "support_figure_number_map": support_figures,
+    "appendix_number_map": appendix_map, "appendix_subsection_exception": {"K.6": "F.5"},
+    "targeted_revisions": revisions,
+    "restored": {"original_section": "J.4", "destination_section": "E.3",
+                 "text_sha256": sha(format_bound), "text": format_bound},
     "technical_exceptions": ["Mechanical heading and cross-reference renumbering",
-                             "Supporting-PDF subtitle and S-prefixed object counters"],
+                             "Supporting-PDF subtitle and S-prefixed object counters",
+                             "Continuous appendix lettering, labels, and cross-references",
+                             "Keep the locked-comparison table together; set main bibliography spacing to 0.7em"],
     "preserved": ["Original full source unchanged", "All retained numerical results and table cells",
                   "144-source continuation results", "16-source 963-target negative adaptive comparison",
-                  "Main network comparison", "Technical amendment disclosure in supporting Appendix L",
-                  "Author list, abstract, funding, and availability statement"],
-    "removed_characters_main_before_numbering": len(SOURCE) - len(main_before_numbering),
+                  "Main network comparison", "Technical amendment disclosure in supporting Appendix G",
+                  "Author list, funding, and availability statement"],
+    "removed_characters_base_main_before_numbering": len(SOURCE) - len(main_before_numbering),
     "changes": changes,
 }
 (ROOT / "edit_manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
 print(json.dumps({"main_characters": len(main), "support_characters": len(support),
                   "main_tables": main_tables, "main_figures": main_figures,
-                  "deleted_main_characters": manifest["removed_characters_main_before_numbering"],
-                  "deletion_only": manifest["main_deletion_only_before_numbering"]}, indent=2))
+                  "base_deleted_main_characters": manifest["removed_characters_base_main_before_numbering"],
+                  "targeted_revisions": len(revisions), "appendix_number_map": appendix_map}, indent=2))

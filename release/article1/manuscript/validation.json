@@ -1,9 +1,14 @@
 {
+  "date": "2026-11-10",
   "original_pdf_pages": 98,
-  "main_deletions_only_after_reversing_mechanical_numbering": true,
-  "support_body_deletions_only_after_reversing_mechanical_numbering": true,
-  "abstract_unchanged": true,
-  "untouched_original_source_and_images_match_input": true,
+  "base_shortening_deletion_only": true,
+  "current_edit_scope": "Approved targeted consistency corrections, simultaneous renumbering, restored proof, and pagination only",
+  "only_declared_edits_since_previous_commit": true,
+  "continuous_appendices_and_resolved_references": true,
+  "restored_core_bound_identical_to_original": true,
+  "table_S4_positive_signs_preserved": true,
+  "untouched_original_source": true,
+  "abstract_change": "Removed passive-library clause only",
   "images_sha256": {
     "Fig6.png": "116a8b884bfef6d732e42a5886e54c4211905429e1cb514711b95a303499005a",
     "Fig14.png": "ff06d88cc5ddac724d0f1b0614b94b484dc402030358312ec05dacd798bfac59",
@@ -23,20 +28,15 @@
   "documents": {
     "main": {
       "pages": 26,
-      "tables_preserved_byte_for_byte": [
-        "3",
-        "5",
-        "6",
-        "7"
-      ],
-      "retained_math_expressions_identical_to_source": 97,
+      "tables_unchanged_since_previous_commit": 4,
+      "retained_math_expressions_identical_to_original": 95,
       "citations_resolved": 33,
       "latex_errors": [],
       "overfull_warnings": [
         "Overfull \\vbox (1.68297pt too high) has occurred while \\output is active []"
       ],
-      "tex_sha256": "78e504eede079dd5d19d464bdc60aa6aabb7057b28b934d5597a7462748eb30e",
-      "pdf_sha256": "a581327ea1407915924210ccfc13fbc5f04a6274396a1f70ae466aec7bd01596",
+      "tex_sha256": "071ae96c8788c789136cc914eef6c79f39407bf416f4d0d99694aa791ef27a42",
+      "pdf_sha256": "853f24fac73a8040a8e7166fc139dca9ca50258c658e38dae0ca4c52f5326270",
       "visual_review_pages": [
         1,
         2,
@@ -68,20 +68,13 @@
     },
     "supporting_appendices": {
       "pages": 24,
-      "tables_preserved_byte_for_byte": [
-        "8",
-        "31",
-        "34",
-        "35",
-        "39",
-        "40"
-      ],
-      "retained_math_expressions_identical_to_source": 219,
+      "tables_unchanged_since_previous_commit": 6,
+      "retained_math_expressions_identical_to_original": 219,
       "citations_resolved": 2,
       "latex_errors": [],
       "overfull_warnings": [],
-      "tex_sha256": "d9f1b2a114ab1240d7a53f99a30b28bca4b41ae38bae3dd302e1e29533633077",
-      "pdf_sha256": "42ead9e66e79ff486ac5e7d1b7f4ababbe732826617a105425e180335ac71db2",
+      "tex_sha256": "637a02781267ca9611542372fe7895ed5a4da2c7212f57708f9ac0203d37b459",
+      "pdf_sha256": "53044ef22bb7f614d5b4ab26c6fe933063fad59472437bf3e5c6d66b88b60a2c",
       "visual_review_pages": [
         1,
         2,
@@ -110,6 +103,5 @@
       ]
     }
   },
-  "visual_review": "All 26 main and 24 supporting pages inspected in rendered contact sheets; main p.3 and supporting p.17 inspected at 150 dpi. No clipping or overlap observed. The main log retains a harmless 1.683 pt vertical box warning on p.3, visually checked.",
-  "date": "2026-11-10"
+  "visual_review": "All 26 main and 24 supporting pages inspected in rendered contact sheets. Supporting pages 12 (restored proof) and 19 (positive table signs) inspected at 150 dpi. No clipping or overlap observed. Main page 3 retains the previously checked harmless 1.683 pt vertical box warning."
 }

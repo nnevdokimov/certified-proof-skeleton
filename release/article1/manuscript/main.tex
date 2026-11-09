@@ -12,6 +12,7 @@
 \usepackage{fancyvrb}
 \usepackage{caption}
 \usepackage{placeins}
+\usepackage{needspace}
 \usepackage{etoolbox}
 \usepackage{bookmark}
 \captionsetup{labelsep=space,labelfont=bf,font=small}
@@ -37,7 +38,7 @@
 \author[1]{\fnm{Vasilii A.} \sur{Gromov}}\email{stroller@rambler.ru}
 \author*[1]{\fnm{Nikolai N.} \sur{Evdokimov}}\email{nevdokimov@hse.ru}
 \affil[1]{\orgdiv{Laboratory for Semantic Analysis}, \orgname{National Research University Higher School of Economics}, \orgaddress{\street{11 Pokrovsky Bulvar}, \city{Moscow}, \postcode{109028}, \country{Russia}}}
-\abstract{We study the direct cognition problem of formal knowledge: constructing a verifiable proof skeleton without a final target theorem under limited computational resources. We introduce a semantic skeleton of mathematics within a programme that distinguishes direct, inverse, and control cognition problems. Our continuous, generational generator separates a bounded active set, an archive of first proofs, and a library of closed fragments. The generator reversibly deactivates premises without deleting certificates. The selector measures how fragments shorten the expanded proof forest and accounts for definitions and overlaps; search need not activate stored fragments. An exponential lower bound on the number of explicitly expanded provable instances, together with a separate unboundedness result for the schema graph, limits exhaustive storage but does not imply that finite slices evade computation. A frozen panel of 144 source trajectories tests neutral continuation under resource guards. At its primary endpoint, learned half-selection with deferred replay increases mean novelty over ungated growth by 95.8\% and 30.3\% at propositional sizes 25 and 200, respectively, with eight positive pairs out of eight in each regime. A locked comparison across 16 sources and 963 human targets finds no confirmed adaptive advantage. The fixed extended repertoire initially covers 29 targets and averages 1.625 new common-residual targets at 90 operational processor-seconds. Network comparisons reveal modular structure and show how proof-edge conventions alter graph profiles. These results establish a certified method that preserves proofs and supports further growth, not a universal accelerator or an optimal skeleton.}
+\abstract{We study the direct cognition problem of formal knowledge: constructing a verifiable proof skeleton without a final target theorem under limited computational resources. We introduce a semantic skeleton of mathematics within a programme that distinguishes direct, inverse, and control cognition problems. Our continuous, generational generator separates a bounded active set, an archive of first proofs, and a library of closed fragments. The generator reversibly deactivates premises without deleting certificates. The selector measures how fragments shorten the expanded proof forest and accounts for definitions and overlaps. An exponential lower bound on the number of explicitly expanded provable instances, together with a separate unboundedness result for the schema graph, limits exhaustive storage but does not imply that finite slices evade computation. A frozen panel of 144 source trajectories tests neutral continuation under resource guards. At its primary endpoint, learned half-selection with deferred replay increases mean novelty over ungated growth by 95.8\% and 30.3\% at propositional sizes 25 and 200, respectively, with eight positive pairs out of eight in each regime. A locked comparison across 16 sources and 963 human targets finds no confirmed adaptive advantage. The fixed extended repertoire initially covers 29 targets and averages 1.625 new common-residual targets at 90 operational processor-seconds. Network comparisons reveal modular structure and show how proof-edge conventions alter graph profiles. These results establish a certified method that preserves proofs and supports further growth, not a universal accelerator or an optimal skeleton.}
 \keywords{formal knowledge, automated reasoning, semantic skeleton, proof hypergraph, theorem generation, Metamath}
 \maketitle
 \noindent\small ORCID (Nikolai N. Evdokimov): \url{https://orcid.org/0009-0003-3756-8281}\par\normalsize
@@ -49,7 +50,7 @@ Comparing the graph of all formally correct mathematical statements with the gra
 
 Our research programme distinguishes three cognition problems -- direct, inverse, and control cognition problems; this paper addresses the first. The \textbf{direct cognition problem} generates a proof skeleton without a final target theorem. We aim not merely to generate correct mathematical statements\footnote{Bachmair and Ganzinger \citep{BachmairGanzinger2001}, in \emph{Resolution Theorem Proving}, describe saturation through inference and redundancy criteria. Wernhard \citep{Wernhard2026}, in \emph{Generating Theorems by Generating Proof Structures}, studies target-free theorem generation. Section 2 distinguishes these foundations from the architecture and future-use test that we develop here.}, but to generate those that belong to the semantic skeleton. \textbf{The inverse problem} takes a particular statement and seeks intermediate lemmas that connect it to the existing base (current skeleton), to certify its status relative to the chosen formal system. This requires a proof of the statement, a proof of its negation, or a separate independence argument; unsuccessful search returns unknown. The \textbf{control problem} selects a growth regime to obtain a graph with desirable properties such as modularity, concentrated reuse, or a particular degree distribution. Tuning towards an external structural objective belongs to control, and success on a target theorem belongs to the inverse problem; neither supplies evidence that a topology emerges spontaneously.
 
-The present paper addresses the direct problem by generating a semantic skeleton of mathematics under a fixed computational budget. In particular, it examines how activating library fragments affects continuous forward growth from axioms. We assess three independent outcomes: (1) how many new canonical formulae the generator discovers, (2) how much reuse costs, and (3) how many results match human statements. 
+The present paper addresses the direct problem by generating a semantic skeleton of mathematics under a fixed computational budget. We evaluate premise-pair selection with deferred replay and compare structural rule repertoires in neutral continuation tests. We measure new canonical formulae, resource costs, and additional coverage of a common initially uncovered set of human statements. 
 
 The paper proposes (1) a formal contract, (2) an executable architecture, and (3) a reproducible comparison. The contract distinguishes proof status, activity, and certificate preservation, as well as schemata and their explicit instances\footnote{A formal contract states checkable guarantees (Definition 1). Proof status records whether a certificate passes the checker; activity permits use as a premise. A certificate records replayable proof steps. A schema contains expression variables; an instance substitutes admissible expressions consistently. Preserving a certificate retains its proof steps and dependencies.}. The architecture supports continuous generational growth through a bounded active set, reversible deactivation, and an append-only certificate log; it separates the fragment library from decisions to activate fragment conclusions as premises. The comparison separates proof preservation, shorter expanded representations, and productive subsequent search. 
 
@@ -81,7 +82,7 @@ McCasland, Bundy, and Smith \citep{McCaslandBundySmith2017}, in MATHsAiD: Automa
 
 Wernhard and Bibel \citep{WernhardBibel2024}, in \emph{Investigations into Proof Structures}, distinguish proof-tree size from minimal directed acyclic proof-graph size and study level-wise enumeration, theorem-size bounds, and bounded caches. Their analysis directly informs our generator. We extend the experimental focus to persistent certified growth and separately control archived proofs, reusable fragments, and active premises.
 
-Wernhard \citep{Wernhard2026}, in \emph{Generating Theorems by Generating Proof Structures}, combines target-free enumeration, inductive levels, lemma synthesis through shorter proof representations, and comparison with human Metamath theorems. We build on this methodological precedent through continuous certified growth, reversible activity control, and prospective leases whose costs we measure. Our comparisons separate fragment recurrence from additional output when search admits fragment conclusions.
+Wernhard \citep{Wernhard2026}, in \emph{Generating Theorems by Generating Proof Structures}, combines target-free enumeration, inductive levels, lemma synthesis through shorter proof representations, and comparison with human Metamath theorems. We build on this methodological precedent through continuous certified growth, reversible activity control, and bounded retention leases whose costs we measure. Our comparisons separate fragment recurrence from additional output when search admits fragment conclusions.
 
 Rawson and colleagues \citep{RawsonEtAl2023}, in \emph{Lemmas: Generation, Selection, Application}, separate those three stages and compare structural usefulness scores with changes in proving work after lemma addition. Their tests motivate our distinction between shorter proof code and faster subsequent search. They assess lemmas through proof tasks; our principal trajectories instead continue without an external final target.
 
@@ -92,7 +93,7 @@ Wernhard and Zombori \citep{WernhardZombori2025}, in their preprint \emph{Mathem
 
 Minton \citep{Minton1990Utility}, in \emph{Quantitative Results Concerning the Utility of Explanation-Based Learning}, measures how applicability checks and maintenance can outweigh gains from acquired knowledge. Our setting adds competition for a bounded number of active-premise slots. Frequent fragment occurrences establish reuse, but only a costed continuation test can assess whether access to those conclusions yields more new results. We therefore report code-length savings separately from computational return.
 
-Kaliszyk and Urban \citep{KaliszykUrban2015}, in \emph{Learning-Assisted Theorem Proving with Millions of Lemmas}, select intermediate lemmas through acquisition cost, reuse, centrality, and greedy changes to the dependency graph. They also distinguish protocols by access to future proofs. Our selector recalculates overlaps using only the preceding forest, because earlier choices change the value of another fragment. After a run, we separately measure how many human statements the results cover; this diagnostic does not supply an independent holdout.
+Kaliszyk and Urban \citep{KaliszykUrban2015}, in \emph{Learning-Assisted Theorem Proving with Millions of Lemmas}, select intermediate lemmas through acquisition cost, reuse, centrality, and greedy changes to the dependency graph. They also distinguish protocols by access to future proofs. Our selector recalculates overlaps using only the preceding forest, because earlier choices change the value of another fragment. Development diagnostics measure human-statement coverage after a run; a separate locked comparison evaluates a previously unscored target pool.
 
 \subsection*{2.5 Trainable generators and growing libraries}\label{trainable-generators-and-growing-libraries}
 \addcontentsline{toc}{subsection}{2.5 Trainable generators and growing libraries}
@@ -101,7 +102,7 @@ Wang and colleagues \citep{WangEtAl2023Lego}, in \emph{LEGO-Prover: Neural Theor
 
 Poesia and colleagues \citep{PoesiaEtAl2024}, in \emph{Learning Formal Mathematics from Intrinsic Motivation}, jointly learn conjecturing and proving in MINIMO from an initial axiomatisation. Ota and colleagues \citep{OtaEtAl2026}, in their preprint \emph{Self-Supervised Theorem Discovery in a Formal Axiomatic System}, turn discovered theorems into prover actions and select them through generalisation and difficulty of rediscovery. Both systems create their own search targets. Our generator instead continues forward without a trainable target-setting loop.
 
-Lin and colleagues \citep{LinEtAl2024}, in \emph{ATG: Benchmarking Automated Theorem Generation for Generative Language Models}, assess generated theorems partly through their usefulness for subsequent proving. We test neutral direct continuation and exact matches to human statements. This choice measures further target-free growth; independent goal-directed tasks would test the complementary inverse problem.
+Lin and colleagues \citep{LinEtAl2024}, in \emph{ATG: Benchmarking Automated Theorem Generation for Generative Language Models}, assess generated theorems partly through their usefulness for subsequent proving. We test neutral direct continuation and additional coverage of human statements. This choice measures further target-free growth; independent goal-directed tasks would test the complementary inverse problem.
 
 \subsection*{2.6 Prover cooperation and graphs of mathematical libraries}\label{prover-cooperation-and-graphs-of-mathematical-libraries}
 \addcontentsline{toc}{subsection}{2.6 Prover cooperation and graphs of mathematical libraries}
@@ -163,15 +164,11 @@ New-growth counts exclude rediscovery of formulae that the archive already conta
 
 This measure counts syntactic novelty under the declared canonicalisation, even after earlier formulae leave the active skeleton. It does not establish mathematical significance for every new result.
 
-An external set \(T\) supplies a supplementary measure of new exact matches:
-
-\[\fitdisplay{M_{b}(\mathcal{S},T \mid \Omega_{0}) = \left| T \cap (V(\Omega_{b})\setminus V(\Omega_{0})) \right|.}\]
-
 The later native tests use typed one-way coverage with mandatory distinct-variable conditions. For source block \(j\), let \(T\) denote the external reference and let \(C_{T}(S_{j,m},0)\) denote the statements that method \(m\) covers before further search. We freeze a common residual
 
 \[\fitdisplay{R_{j} = T\setminus \bigcup_{m}C_{T}(S_{j,m},0),\quad\quad Q_{j}(m,h) = \left| R_{j} \cap C_{T}(S_{j,m},h) \right|.}\]
 
-The observer measures coverage of committed results; it supplies no premise, reward, or proposed conclusion. The residual removes every method's initial coverage advantage within a block. Counts of \(Q_{j}\) test new reference capability, whereas \(N_{b}\) counts syntactically new formulae outside the common archive. Neither measure substitutes for the other, and exact matches remain a separate readout.
+The observer measures coverage of committed results; it supplies no premise, reward, or proposed conclusion. The residual removes every method's initial coverage advantage within a block. Counts of \(Q_{j}\) test new reference capability, whereas \(N_{b}\) counts syntactically new formulae outside the common archive. Neither measure substitutes for the other.
 
 Resource accounting distinguishes the active set and reserve from the library, proof support, and archive. We measure their sizes separately, together with peak memory for the entire process; a fixed premise count does not imply fixed total memory. The principal size bounds \(L = 25,200\) count every syntax-tree vertex, not only leaves, and therefore constrain a different quantity from the active-set limit.
 
@@ -268,7 +265,7 @@ A generation denotes a layer of new consequences, whereas an epoch denotes a poi
 \item
   Update productive-use records and finite retention periods. Apply active-set and queue bounds while preserving certificates for inactive formulae. Return eligible rediscoveries to the queue subject to the specified delay and quota.
 \item
-  At the designated epochs, select a library from the preceding proof forest. In the active variant, apply bounded retention to its conclusions; in the passive variant, leave search state unchanged.
+  At the designated epochs, select a library from the preceding proof forest. Apply bounded retention to selected conclusions within ordinary premise slots while preserving their archived certificates.
 \item
   Store the new certificate increment and state snapshot. Credit only a fully completed layer within budget, and record the stopping reason.
 \end{enumerate}
@@ -284,7 +281,7 @@ The algorithmic budget includes fragment selection, index updates, internal chec
 
 Every archive certificate expands to the initial base provided the axioms satisfy the configuration, each new step passes checking, and each reference points to an earlier certified vertex. Appendices B.1--B.2 state the formal guarantees and prove them. These guarantees preserve existing proofs when the policy deactivates premises, but do not ensure complete enumeration: an inactive premise can prevent a useful future rule application.
 
-Adding a provable lemma does not strengthen the underlying logic, but can change which proofs the available resources can reach \citep{CookReckhow1979}. Under size and height bounds, we must account explicitly for intermediate formulae when we expand proofs; Appendix B and Section G.1 provide the full resource conditions and a specific identity example. Complete finite saturation additionally requires fair processing of every rule application that becomes available, a guarantee that the present bounded policy does not establish.
+Adding a provable lemma does not strengthen the underlying logic, but can change which proofs the available resources can reach \citep{CookReckhow1979}. Under size and height bounds, we must account explicitly for intermediate formulae when we expand proofs; Appendix B and Section C.1 provide the full resource conditions and a specific identity example. Complete finite saturation additionally requires fair processing of every rule application that becomes available, a guarantee that the present bounded policy does not establish.
 
 \subsection*{5.5 Learned pair selection with deferred replay}\label{learned-pair-selection-with-deferred-replay}
 \addcontentsline{toc}{subsection}{5.5 Learned pair selection with deferred replay}
@@ -302,7 +299,7 @@ The upper codec preserves a base dictionary \(D_{0}\) and adds a definition only
 
 \[\fitdisplay{\Delta(v \mid D) = (r - 1)(b - 1) - 2.}\]
 
-The two charged symbols account for a new definition's root and header after the reference savings. Appendix K.1 proves this identity and its telescoping guarantee. Positive increments improve the previous encoding, even when \(D_{0}\) already contains mandatory entries; they do not guarantee a globally shortest code, fewer archive bytes, or faster future inference.
+The two charged symbols account for a new definition's root and header after the reference savings. Appendix F.1 proves this identity and its telescoping guarantee. Positive increments improve the previous encoding, even when \(D_{0}\) already contains mandatory entries; they do not guarantee a globally shortest code, fewer archive bytes, or faster future inference.
 
 \subsection*{5.7 Structural synthesis of general lemma schemata}\label{structural-synthesis-of-general-lemma-schemata}
 \addcontentsline{toc}{subsection}{5.7 Structural synthesis of general lemma schemata}
@@ -313,7 +310,7 @@ For example, a programme with boundary \(p\), \(p \rightarrow q\), and \(q \righ
 
 \[\fitdisplay{(p \rightarrow q) \rightarrow \left( (q \rightarrow r) \rightarrow (p \rightarrow r) \right).}\]
 
-The compiler recovers this familiar composition law without a human theorem target. It expands every new step through ax-1, ax-2, and ax-mp, or invokes an existing checked schema through an explicit admissible instance. All output certificates pass the native checker and the independent Metamath verifier. Proposition K.2 states the proof obligation; this compiler implements the standard deduction construction rather than a new deduction theorem.
+The compiler recovers this familiar composition law without a human theorem target. It expands every new step through ax-1, ax-2, and ax-mp, or invokes an existing checked schema through an explicit admissible instance. All output certificates pass the native checker and the independent Metamath verifier. Proposition F.2 states the proof obligation; this compiler implements the standard deduction construction rather than a new deduction theorem.
 
 The catalogue distinguishes a requested principal formula from the actual schema that its certificate supplies. A more general stored schema may cover several requests, so we deduplicate delivered statements and their applicability frames. This distinction explains why candidate counts and delivered-rule counts need not coincide. The finite grammar and size guards bound the actual construction, not all possible useful lemmas.
 
@@ -322,7 +319,7 @@ The catalogue distinguishes a requested principal formula from the actual schema
 
 The final native architecture combines the cumulative constructor and positive-marginal codec with a finite structural repertoire. A common grammar delivers 217 checked schemata through three open MP nodes, including 16 short outputs through two nodes. The fixed quota-matched variant adds 12 extended outputs that the fixed ranking selects using pooled earlier development profiles. It uses no held-out theorem to select those rules. This fixed repertoire supplies a reproducible working configuration, not an optimum over all possible libraries.
 
-The locked comparison separately tests whether the source history should change those 12 outputs, versus fixed, random, and whole-catalogue alternatives. The adaptive score belongs to that comparative experiment rather than the recommended architecture. Appendix K.6 specifies it fully, and the results retain its registered outcome.
+The locked comparison separately tests whether the source history should change those 12 outputs, versus fixed, random, and whole-catalogue alternatives. The adaptive score belongs to that comparative experiment rather than the recommended architecture. Appendix F.5 specifies it fully, and the results retain its registered outcome.
 
 \subsection*{5.9 Search permissions after the library freezes}\label{search-permissions-after-the-library-freezes}
 \addcontentsline{toc}{subsection}{5.9 Search permissions after the library freezes}
@@ -358,15 +355,15 @@ Each random initial scheduler state defines one trajectory and hence one repeat.
 
 The native tests inherit a certified 2,708-statement library on the explicit basis that the network study specifies. They continue the cumulative constructor rather than rebuild that source from axioms. The constructor retains its learned half-filter on supported implication/negation terms, intrinsic fallback scores on other native syntax, deferred opportunities, four ordinary fragment slots, and a cap of 128 active derived premises. Rot-pruning deactivates an unleased, never-used premise after eight idle blocks; cap enforcement can deactivate other premises as well. Neither operation deletes its certificate.
 
-A development comparison uses six new states of the random number generator (RNG) for source construction, two neutral continuers, and nested horizons of one, three, and eight growth CPU-seconds. Its reference contains 919 unique compatible closed native statements, 34 of which axiom instances already cover. That reference previously informed development and cannot supply an independent holdout. We retain it to diagnose the mechanism and motivate the frozen test, not to confirm the adaptive claim.
+Our earlier development reference contains 919 unique compatible closed native statements; axiom instances already cover 34. This reference informed method development. We use it to identify overlap with the held-out corpus.
 
 For the one-shot test, Wernhard's POI supplies an external benchmark of 1,374 implication-form propositional theorems from Metamath \citep{Wernhard2026}. We exclude 402 alpha-exact matches to the preceding reference after unfolding the specified conjunction, disjunction, and equivalence definitions. Nine files retain named truth or falsehood constants outside the declared implication/negation language; we exclude rather than reinterpret them. The resulting corpus contains 963 unique targets. This filtering removes specified syntactic overlap, not all logical equivalence or one-way subsumption, and both references share Metamath ancestry.
 
-The protocol fixes 16 new source RNG states, five arms, and two neutral continuers, giving 160 trajectories but only 16 paired statistical blocks. Each common source runs 1,500 further opportunities. Arms receive the common compressed source and short catalogue, then add no extended rule, a fixed set of 12, a random set of 12, a source-adaptive set of 12, or all 201 extended entries. The full-catalogue control tests whether adaptation improves on supplying the entire finite structural repertoire rather than merely more rules.
+The protocol fixes 16 new source random number generator (RNG) states, five arms, and two neutral continuers, giving 160 trajectories but only 16 paired statistical blocks. Each common source runs 1,500 further opportunities. Arms receive the common compressed source and short catalogue, then add no extended rule, a fixed set of 12, a random set of 12, a source-adaptive set of 12, or all 201 extended entries. The full-catalogue control tests whether adaptation improves on supplying the entire finite structural repertoire rather than merely more rules.
 
 The protocol requires all blind construction and continuation to finish and commit file hashes before the evaluator opens the targets once. No human target enters generation, features, admission, or the reward. The primary endpoint averages \(Q_{j}(m,60)\) across the two continuers within each source block. A second endpoint imposes 90 CPU-seconds of measured cold operational cost, charging new source work, the whole catalogue, arm preparation, and continuation setup before growth. Historical costs before the inherited checkpoint, interpreter startup, offline goal observation, terminal bulk export, and independent audit remain separate; this endpoint does not measure a complete from-axioms prover job.
 
-We compare adaptive selection with fixed, random, and full-catalogue controls through exact one-sided paired sign flips, assuming sign exchangeability under the null. For each comparison we take the larger p-value from the two endpoints, then apply Holm's correction across the three controls. Confirmation requires an adjusted p below 0.05 and a mean gain of at least one residual target at both endpoints against every control. All planned cells and CPU horizons must finish, the selector must vary across sources, and the independent certificate and permission audit must pass. Missing cells, early guards, or a constant selector preclude confirmation. Appendix L records the frozen commitment and outcome.
+We compare adaptive selection with fixed, random, and full-catalogue controls through exact one-sided paired sign flips, assuming sign exchangeability under the null. For each comparison we take the larger p-value from the two endpoints, then apply Holm's correction across the three controls. Confirmation requires an adjusted p below 0.05 and a mean gain of at least one residual target at both endpoints against every control. All planned cells and CPU horizons must finish, the selector must vary across sources, and the independent certificate and permission audit must pass. Missing cells, early guards, or a constant selector preclude confirmation. Appendix G records the frozen commitment and outcome.
 
 The native bound of 160 constrains stored canonical formulae, and the certificate-height bound reaches 256. These bounds do not constrain every fully instantiated intermediate formula after expanding all substitutions, unlike the explicit-instance convention in Theorem 1. Native trajectories and the earlier propositional/modal panels therefore retain separate labels, metrics, and cost accounts.
 
@@ -376,7 +373,7 @@ The native bound of 160 constrains stored canonical formulae, and the certificat
 \subsection*{7.1 Neutral continuation and empirical Pareto trade-offs}\label{neutral-continuation-and-empirical-pareto-trade-offs}
 \addcontentsline{toc}{subsection}{7.1 Neutral continuation and empirical Pareto trade-offs}
 
-The later frozen panel comprises 144 source trajectories, six pair-selection policies, three logic--size regimes, and eight scheduler states per regime. Each source supplies packages with up to 4, 16, or 64 anchors at nominal source ceilings of 60, 180, and 600 CPU-seconds. Separate neutral generators continue from those packages, giving 1,296 continuations with nested readings at 10, 30, and 60 CPU-seconds. The primary endpoint fixes the source ceiling at 180 CPU-seconds, the anchor cap at 16, and continuation at 30 CPU-seconds. Novelty excludes the union of concurrent source archives and the frozen training archives; Appendix I records the protocol and checks.
+The later frozen panel comprises 144 source trajectories, six pair-selection policies, three logic--size regimes, and eight scheduler states per regime. Each source supplies packages with up to 4, 16, or 64 anchors at nominal source ceilings of 60, 180, and 600 CPU-seconds. Separate neutral generators continue from those packages, giving 1,296 continuations with nested readings at 10, 30, and 60 CPU-seconds. The primary endpoint fixes the source ceiling at 180 CPU-seconds, the anchor cap at 16, and continuation at 30 CPU-seconds. Novelty excludes the union of concurrent source archives and the frozen training archives; Appendix D records the protocol and checks.
 
 At this endpoint, the learned half-filter with deferred replay improves mean novelty over ungated growth in both propositional regimes, with eight positive pairs out of eight. The size-25 regime also improves the measured CPU and package-byte coordinates in every pair. The size-200 package grows by 16.5\% on average, illustrating why a useful skeleton need not minimise every resource coordinate. The modal comparison splits four wins and four losses despite a positive mean (Table 1).
 
@@ -446,6 +443,7 @@ These trade-offs favour different settings for different budgets. The learned ha
 
 All 16 source blocks and 160 planned continuations finish both registered horizons and pass independent replay. Each table entry averages the two neutral continuers within a source, then averages the 16 sources. Initial coverage counts all 963 reference targets; both future columns count only the common initially uncovered residual within that source block. Derived-anchor counts exclude 29 basis roots and separate certificate-only support (Table 2).
 
+\Needspace{19\baselineskip}
 \begingroup
 \small
 \setlength{\tabcolsep}{3pt}
@@ -543,16 +541,16 @@ fixed all & +0.09375 & +0.09375 & 1.000 \\
 
 \endgroup
 
-Every Holm-adjusted p-value equals 1.000, and no contrast reaches the registered mean margin of one additional target at both clocks. We therefore retain fixed structural rules in the working architecture and do not attribute a confirmed gain to adaptive catalogue ranking. Appendix L reports the full paired comparison, statistical rule, and technical amendment.
+Every Holm-adjusted p-value equals 1.000, and no contrast reaches the registered mean margin of one additional target at both clocks. We therefore retain fixed structural rules in the working architecture and do not attribute a confirmed gain to adaptive catalogue ranking. Appendix G reports the full paired comparison, statistical rule, and technical amendment.
 
 The independent audit reconstructs 4,174,478 admission events and 2,846 hidden-support rediscovery witnesses, checks all target positions, and reproduces the endpoints and decision. These counts include repeated events across trajectories, not independent theorems. The comparison charges the full recorded catalogue to every arm under the shared backend; it does not test a specialised static implementation that avoids compiling unused entries.
 
 \subsection*{7.3 Metamath and generated proof networks}\label{metamath-and-generated-proof-networks}
 \addcontentsline{toc}{subsection}{7.3 Metamath and generated proof networks}
 
-The network comparison follows the cumulative method through its delivered library and certificate support. Panel b uses the first source, 2026102201, with the quota-matched fixed structural repertoire. Appendix N presents the profiles of both variants and the separately preselected adaptive image. Both representatives follow the first-source convention, independently of target coverage, graph appearance, and power-law p-values.
+The network comparison follows the cumulative method through its delivered library and certificate support. Panel b uses the first source, 2026102201, with the quota-matched fixed structural repertoire. Appendix H presents the profiles of both variants and the separately preselected adaptive image. Both representatives follow the first-source convention, independently of target coverage, graph appearance, and power-law p-values.
 
-All objects share the explicit native basis from the pinned \path{set.mm} revision \citep{MetamathSetMMPinned}: 25 logical or set-theoretic axioms and rules, six definitions, and 12 syntax assertions. Twenty-nine closed source schemata initialise search. The inherited proof-closed core contains 2,708 statements; the cumulative constructor continues that core, filters and revisits opportunities, applies reversible rot-pruning, compiles structural rules, and codes recurrent proofs. Panel b shows the delivered interface and every ancestor that its certificates require, not the full inherited archive. Appendix N records the new sources, projections, and metrics.
+All objects share the explicit native basis from the pinned \path{set.mm} revision \citep{MetamathSetMMPinned}: 25 logical or set-theoretic axioms and rules, six definitions, and 12 syntax assertions. Twenty-nine closed source schemata initialise search. The inherited proof-closed core contains 2,708 statements; the cumulative constructor continues that core, filters and revisits opportunities, applies reversible rot-pruning, compiles structural rules, and codes recurrent proofs. Panel b shows the delivered interface and every ancestor that its certificates require, not the full inherited archive. Appendix H records the new sources, projections, and metrics.
 
 The first-source fixed library provides 675 derived anchors and 29 basis roots; 137 further vertices supply certificate-only support. Its projection therefore contains 841 vertices and 1,573 directed arcs. Across all 16 fixed sources, anchor counts range from 665 to 682, with a mean of 675.0; projected sizes range from 836 to 852. Hidden support does not confer search rights, and a verifier can expand every anchor to the original basis.
 
@@ -628,7 +626,7 @@ Pure power law p & 0.09895 & 0.54640 & 0.01080 & 0.36490 \\
 
 \endgroup
 
-Table columns follow the figure panels. C, L, D, and Q refer to simple undirected projections. C assigns zero below degree two; L and D refer to the largest connected component and use every observed breadth-first-search (BFS) source. Panel a contains 20 isolates and panel b contains 14 unused basis roots; panels c and d remain connected. Q0 averages ten simple degree-preserving controls, with three Louvain starts for every observed and control graph. Panel b's control paths also use every source; the retained c and d controls estimate paths from 64 sources. The tail test for outgoing distinct-use degree fixes 20,000 bootstrap draws and refits both threshold and exponent. Appendix N reports all 32 new profiles and their scope.
+Table columns follow the figure panels. C, L, D, and Q refer to simple undirected projections. C assigns zero below degree two; L and D refer to the largest connected component and use every observed breadth-first-search (BFS) source. Panel a contains 20 isolates and panel b contains 14 unused basis roots; panels c and d remain connected. Q0 averages ten simple degree-preserving controls, with three Louvain starts for every observed and control graph. Panel b's control paths also use every source; the retained c and d controls estimate paths from 64 sources. The tail test for outgoing distinct-use degree fixes 20,000 bootstrap draws and refits both threshold and exponent. Appendix H reports all 32 new profiles and their scope.
 
 The c--d pair isolates an edge-recording effect on identical statements: alternative edges raise clustering from 0.0347 to 0.3382, shorten the mean path from 4.334 to 3.213, and lower modularity from 0.675 to 0.058. No logical or vertex change explains that contrast. The ordinary proof-network profile therefore depends materially on how the representation records alternative derivations.
 
@@ -667,7 +665,7 @@ The principal result answers the direct question through an executable proof-pre
 \section*{10 Reproducibility}\label{reproducibility}
 \addcontentsline{toc}{section}{10 Reproducibility}
 
-The reproducibility records link every new numerical claim to its protocol, code, and source results. All 16 blind receipts, the one-shot evaluation, the completed pipeline, and the independent review refer to the corrected seal in Appendix L. The auditor rechecks permitted inference, target-instance certificates, common residuals, and the statistical decision. 
+The reproducibility records link every new numerical claim to its protocol, code, and source results. All 16 blind receipts, the one-shot evaluation, the completed pipeline, and the independent review refer to the corrected seal in Appendix G. The auditor rechecks permitted inference, target-instance certificates, common residuals, and the statistical decision. 
 
 \section*{Statements and Declarations}
 
@@ -691,6 +689,7 @@ The research leading to these results received funding from the Basic Research P
 
 We used the HSE University supercomputer to conduct the computational research.
 
+\setlength{\bibsep}{0.7em}
 \begin{thebibliography}{37}
 \bibitem{MetamathSetMMPinned} Metamath Project. (2026). \emph{set.mm: ZFC set theory database, fixed experimental version}. \url{https://github.com/metamath/set.mm/commit/584b6852f57f281e9be1793332f1e52e077693c8}
 

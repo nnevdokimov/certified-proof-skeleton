@@ -239,7 +239,7 @@ The purely implicational KSP calculus, with schemata \(K\), \(S\), and Peirce, a
 
 \[\fitdisplay{b_{leaf}^{KSP + I}(v) \leq b_{leaf}^{KSP}(v) \leq \frac{9}{2}\, b_{leaf}^{KSP + I}(v).}\]
 
-Eliminating \(I\) increases height by at most two. The formula \(p \rightarrow p\) attains the factor \(9/2\): its conclusion contains two leaves, whereas every base proof minimising the largest leaf count reaches nine leaves; counting all tree vertices instead gives 3 and 17, so that metric does not share the factor. The lower bound relies on a complete computational closure check through eight leaves, and Appendix G, Section G.1 presents the construction; this result bounds resources in one calculus, not search-time speed-up.
+Eliminating \(I\) increases height by at most two. The formula \(p \rightarrow p\) attains the factor \(9/2\): its conclusion contains two leaves, whereas every base proof minimising the largest leaf count reaches nine leaves; counting all tree vertices instead gives 3 and 17, so that metric does not share the factor. The lower bound relies on a complete computational closure check through eight leaves, and Appendix C, Section C.1 presents the construction; this result bounds resources in one calculus, not search-time speed-up.
 
 \subsection*{B.4. Completeness and bounded resources}\label{b.4.-completeness-and-bounded-resources}
 \addcontentsline{toc}{subsection}{B.4. Completeness and bounded resources}
@@ -257,11 +257,11 @@ Eliminating \(I\) increases height by at most two. The formula \(p \rightarrow p
 
 The lemma guarantees neither gain in later epochs nor faster search. The metric counts symbols in the expanded proof term, not bytes or time, whereas the common archive already shares identical subproofs. Consequently, \(G\) measures no additional compression of that directed acyclic graph.
 
-\section*{Appendix G. Additional checks}\label{appendix-g.-additional-checks}
-\addcontentsline{toc}{section}{Appendix G. Additional checks}
+\section*{Appendix C. Additional checks}\label{appendix-c.-additional-checks}
+\addcontentsline{toc}{section}{Appendix C. Additional checks}
 
-\subsection*{G.1. Resource cost of a ready-made identity}\label{g.1.-resource-cost-of-a-ready-made-identity}
-\addcontentsline{toc}{subsection}{G.1. Resource cost of a ready-made identity}
+\subsection*{C.1. Resource cost of a ready-made identity}\label{c.1.-resource-cost-of-a-ready-made-identity}
+\addcontentsline{toc}{subsection}{C.1. Resource cost of a ready-made identity}
 
 The identity calculation uses \(J = X \rightarrow X\), \(P = X \rightarrow (J \rightarrow X)\), and \(Q = X \rightarrow (X \rightarrow X)\). The following proof derives the identity through two applications of modus ponens. Its explicit intermediate formulae provide the resource accounting below:
 
@@ -279,11 +279,11 @@ This calculation uses only the leaf metric \(\ell_{leaf}\). If \(X\) contains \(
 
 The complete closure through eight leaves passes checking but contains no \(p \rightarrow p\), whereas the proof above fits within nine leaves. The lower bound therefore follows from a finite computational check of this particular calculus, not merely from the upper-bound construction; the linked report retains checksums and independent checking of the smaller window. The factor \(9/2\) does not automatically transfer to other axiomatisations, search time, or certificate length.
 
-\section*{Appendix I. Continuation and Pareto evidence}\label{appendix-i.-continuation-and-pareto-evidence}
-\addcontentsline{toc}{section}{Appendix I. Continuation and Pareto evidence}
+\section*{Appendix D. Continuation and Pareto evidence}\label{appendix-d.-continuation-and-pareto-evidence}
+\addcontentsline{toc}{section}{Appendix D. Continuation and Pareto evidence}
 
-\subsection*{I.1. Frozen pair selection and replay panel}\label{i.1.-frozen-pair-selection-and-replay-panel}
-\addcontentsline{toc}{subsection}{I.1. Frozen pair selection and replay panel}
+\subsection*{D.1. Frozen pair selection and replay panel}\label{d.1.-frozen-pair-selection-and-replay-panel}
+\addcontentsline{toc}{subsection}{D.1. Frozen pair selection and replay panel}
 
 The panel crosses six policies, three logic--size regimes, and scheduler states 8701--8708. The policies admit all compatible pairs, a random half, or a learned half; the latter two also run with deferred replay, and a sixth variant retains a learned quarter with replay. All conditions use the same initial axioms, canonical forms, model files, lifecycle, and certificate checker within a regime. The original training archives supply labels and weights; this panel introduces no human theorem targets or new model fitting.
 
@@ -295,8 +295,8 @@ The independent cluster checker verifies 24 logic--state blocks. Local checks co
 
 The reported source, selection, and continuation components total 27.17 CPU-hours; including the two audit stages gives 35.02 CPU-hours, excluding some startup and orchestration. Earlier training and preparation cost 37.79 CPU-seconds once. These components describe measured process work rather than the SLURM bill or a hardware-independent complexity measure. At the credited endpoints, memory guards and incomplete layers can leave actual CPU below the assigned ceiling.
 
-\subsection*{I.2. Finite grid and Pareto coordinates}\label{i.2.-finite-grid-and-pareto-coordinates}
-\addcontentsline{toc}{subsection}{I.2. Finite grid and Pareto coordinates}
+\subsection*{D.2. Finite grid and Pareto coordinates}\label{d.2.-finite-grid-and-pareto-coordinates}
+\addcontentsline{toc}{subsection}{D.2. Finite grid and Pareto coordinates}
 
 The new descriptive Pareto check uses only source ceiling 180 and continuation horizon 30. Each regime contains six policies at three anchor caps, hence 18 mean triples across eight schedules. The coordinates use credited chain CPU, complete package bytes, and new schemata outside the concurrent source union and old training. We recompute dominance from the existing aggregate records; no search, hypothesis test, or selection of favourable states follows this check.
 
@@ -372,11 +372,11 @@ Modal 25 & H+replay & 64 & 141.78 & 3231 & 30158.75 \\
 
 These rows expose a genuine trade-off. A learned half-filter without replay reaches a cheaper region at size 25, whereas replay reaches greater novelty or smaller proof-backed packages in other cells. At propositional size 200, half and quarter replay both retain nondominated settings. We therefore retain the finite empirical Pareto set rather than nominate one universal skeleton or collapse all resource coordinates into an unexplained scalar score.
 
-\section*{Appendix J. Native proof networks}\label{appendix-j.-native-proof-networks}
-\addcontentsline{toc}{section}{Appendix J. Native proof networks}
+\section*{Appendix E. Native proof networks}\label{appendix-e.-native-proof-networks}
+\addcontentsline{toc}{section}{Appendix E. Native proof networks}
 
-\subsection*{J.1. Native basis and search}\label{j.1.-native-basis-and-search}
-\addcontentsline{toc}{subsection}{J.1. Native basis and search}
+\subsection*{E.1. Native basis and search}\label{e.1.-native-basis-and-search}
+\addcontentsline{toc}{subsection}{E.1. Native basis and search}
 
 The native implementation reads the same pinned \path{set.mm} source as the preceding study, at commit \path{584b6852f57f281e9be1793332f1e52e077693c8}, with SHA-256 \path{90de6bac87d549023fc83fb698a1baacfed3f99b71438722171674f16777c881}. The basis comprises 25 logical or ZFC assertions, including modus ponens and generalisation, six definitions, and 12 syntax assertions. Variables carry the \path{wff}, \path{setvar}, or \path{class} type. Canonical statement identity includes the formula and its mandatory distinct-variable frame; different such frames can therefore create separate vertices for one formula body. Certificates retain substitutions, joint premises, and the additional variables that proof replay needs.
 
@@ -384,8 +384,8 @@ The native given-clause policy selects one waiting statement and combines it wit
 
 The run allows 300 search CPU-seconds, 300,000 archived nodes, 10,000 selections, formula size at most 160, and proof height at most 64. It reaches the node guard after 222.310068 search CPU-seconds. Its archive contains 300,000 statement records and 259,344 distinct formula bodies. The processed core contains 2,679 derived anchors and 29 sources; all first-proof ancestors of those anchors already belong to that core. Its 2,708 records contain 2,452 distinct formula bodies and reach proof height 25. Official Metamath replay checks the exported compact library and its references to the original source. The policy computes many unselected candidates, so these results do not establish generation of skeleton points alone or an equal-budget advantage over another generator.
 
-\subsection*{J.2. Finite reference and human fragment}\label{j.2.-finite-reference-and-human-fragment}
-\addcontentsline{toc}{subsection}{J.2. Finite reference and human fragment}
+\subsection*{E.2. Finite reference and human fragment}\label{e.2.-finite-reference-and-human-fragment}
+\addcontentsline{toc}{subsection}{E.2. Finite reference and human fragment}
 
 The exact reference starts with 29 source schemata and exhausts the declared MGU-MP/generalisation operator through height three. Its successive cumulative sizes reach 29, 185, 1,273, and 11,772. It applies no active-core, formula-size, or skeleton-selection cut. Earlier generic CLI fields record size 160 and proof height 64, but the exact mode does not apply them; its largest observed formula reaches size 163. The separate specification records this distinction. Independent replay and a separate enumerator check the retained nodes and inference records.
 
@@ -395,22 +395,28 @@ The human extractor follows every actual logical and syntactic proof dependency 
 
 The separate human-statement diagnostic merges duplicate closed statements into 919 canonical statements and treats this set separately from the preceding 108-statement propositional benchmark. It finds 34 one-way matches in the initial basis, 82 in the native skeleton, and 98 in its archive; exact matches reach 12, 55, and 66. Typed one-way matching keeps target variables rigid and checks required distinct-variable conditions. This post-hoc diagnostic supplies no unseen holdout and no causal efficiency comparison. The core contains implication identity and both double-negation directions, but still lacks equality reflexivity, equality symmetry, and curried implication transitivity. Its operational scope therefore falls short of a general human mathematical library.
 
-\subsection*{J.3. Metrics and reference graphs}\label{j.3.-metrics-and-reference-graphs}
-\addcontentsline{toc}{subsection}{J.3. Metrics and reference graphs}
+\subsection*{E.3. Metrics and reference graphs}\label{e.3.-metrics-and-reference-graphs}
+\addcontentsline{toc}{subsection}{E.3. Metrics and reference graphs}
 
 The graph builder links every distinct premise assertion to each conclusion that cites it, removes loops and repeated arcs, and excludes primitive-rule vertices in all objects. For paths, clustering, and modularity, it collapses direction and parallel edges to a simple undirected graph. Local clustering contributes zero at degree below two. Breadth-first search from every vertex computes exact observed distances without retaining a dense distance matrix. Mean path and diameter refer to the largest component. Three fixed-seed Louvain starts supply the largest observed modularity for each graph.
 
 Ten simple rewired controls preserve the undirected degree of every labelled vertex exactly. Each control attempts ten rewiring moves per edge; this finite procedure does not establish independent uniform sampling from the degree-constrained ensemble. The reference mean Q0 averages their Louvain modularities. We divide observed clustering by mean control clustering, then divide the result by the ratio of observed mean path to mean control path. Observed paths cover every source; control paths use 64 sampled sources. Under homogeneous G(n,m) controls, the first three graphs yield ratios 31.162, 17.091, and 294.915, whereas degree-preserving controls yield 3.990, 0.765, and 0.592. This contrast shows why a short path and an ER-based ratio alone do not isolate clustering beyond degree heterogeneity.
 
-The directed out-degree counts distinct conclusions that cite a vertex. The pure-tail fit uses the exact discrete power-law likelihood and chooses its lower cutoff through the declared fit procedure. Each of 20,000 semiparametric bootstrap draws refits both the cutoff and exponent, with fixed seed 20261020 and no threshold-driven stopping. The test follows a conditional iid tail model, not independent proof-graph trajectories. \section*{Appendix K. Native cumulative libraries and structural synthesis}\label{appendix-k.-native-cumulative-libraries-and-structural-synthesis}
-\addcontentsline{toc}{section}{Appendix K. Native cumulative libraries and structural synthesis}
+The directed out-degree counts distinct conclusions that cite a vertex. The pure-tail fit uses the exact discrete power-law likelihood and chooses its lower cutoff through the declared fit procedure. Each of 20,000 semiparametric bootstrap draws refits both the cutoff and exponent, with fixed seed 20261020 and no threshold-driven stopping. The test follows a conditional iid tail model, not independent proof-graph trajectories. 
 
-\subsection*{K.1. Exact gains above a nonempty dictionary}\label{k.1.-exact-gains-above-a-nonempty-dictionary}
-\addcontentsline{toc}{subsection}{K.1. Exact gains above a nonempty dictionary}
+The first-proof native graphs attain maximum core number two, the human named graph attains six, and the all-inference graph attains 190. These values do not rank mathematical depth. In a DAG that records only first proofs through binary modus ponens and unary generalisation, every derived vertex cites at most two earlier neighbours.
+
+\textbf{Proof of the format bound.} Consider any nonempty induced subgraph and choose its last vertex in a topological order. It cannot point to another vertex in that subgraph, and at most two premise neighbours point to it. Every induced subgraph therefore contains a vertex of degree at most two, which bounds degeneracy and maximum core number by two. Named human steps can cite many premises, and the cyclic all-inference graph does not satisfy this first-proof DAG condition.
+
+\section*{Appendix F. Native cumulative libraries and structural synthesis}\label{appendix-f.-native-cumulative-libraries-and-structural-synthesis}
+\addcontentsline{toc}{section}{Appendix F. Native cumulative libraries and structural synthesis}
+
+\subsection*{F.1. Exact gains above a nonempty dictionary}\label{f.1.-exact-gains-above-a-nonempty-dictionary}
+\addcontentsline{toc}{subsection}{F.1. Exact gains above a nonempty dictionary}
 
 Let \(L(D;R)\) denote the encoded-symbol term in the square brackets of the definition of \(G(D;R)\). Fix a finite acyclic proof archive, a forest \(R\), and a mandatory base dictionary \(D_{0}\). References stop expansion at selected definitions; each selected definition expands its root once and charges a header. The codec recomputes expanded occurrences across both the forest and the current definition bodies.
 
-\textbf{Proposition K.1.} Suppose an eligible unselected fragment \(v\) occurs \(r\) times in that current expansion and its current body contains \(b\) symbols. Adding \(v\) changes encoded length by
+\textbf{Proposition F.1.} Suppose an eligible unselected fragment \(v\) occurs \(r\) times in that current expansion and its current body contains \(b\) symbols. Adding \(v\) changes encoded length by
 
 \[\fitdisplay{L(D;R) - L(D \cup \{ v\};R) = r(b - 1) - (b + 1) = (r - 1)(b - 1) - 2.}\]
 
@@ -422,12 +428,12 @@ If the codec adds only fragments with a strictly positive value and recalculates
 
 This bound compares the final code with the existing code; it does not guarantee non-negative total gain against an empty dictionary. Mandatory entries may already carry overhead. The result also leaves physical DAG storage and future search cost outside its guarantee. The native implementation applies no target cardinality to the upper dictionary; a separate finite working-set limit governs source construction.
 
-\subsection*{K.2. Checked deduction from open MP programmes}\label{k.2.-checked-deduction-from-open-mp-programmes}
-\addcontentsline{toc}{subsection}{K.2. Checked deduction from open MP programmes}
+\subsection*{F.2. Checked deduction from open MP programmes}\label{f.2.-checked-deduction-from-open-mp-programmes}
+\addcontentsline{toc}{subsection}{F.2. Checked deduction from open MP programmes}
 
 An open programme contains ordered binary MP nodes and boundary hypotheses. A set partition identifies boundary hypotheses that must coincide. The compiler introduces fresh typed variables for the distinct holes and internal conclusions, imposes every MP equation jointly, and rejects an occurs-check or type failure. A successful unifier instantiates a finite consistent open derivation. Gen terminates the abstraction and never enters its open interior.
 
-\textbf{Proposition K.2.} Let \(P\) denote a finite consistent derivation of \(C\) from boundary hypotheses \(H_{1},\ldots,H_{m}\), using MP and instances of ax-1 and ax-2. For every permutation \(\pi\), the original axioms derive
+\textbf{Proposition F.2.} Let \(P\) denote a finite consistent derivation of \(C\) from boundary hypotheses \(H_{1},\ldots,H_{m}\), using MP and instances of ax-1 and ax-2. For every permutation \(\pi\), the original axioms derive
 
 \[\fitdisplay{H_{\pi(1)} \rightarrow \left( H_{\pi(2)} \rightarrow \cdots \rightarrow (H_{\pi(m)} \rightarrow C)\cdots \right).}\]
 
@@ -435,14 +441,14 @@ An open programme contains ordered binary MP nodes and boundary hypotheses. A se
 
 The compiler may reuse an existing more general closed schema through a checked one-way instance. It records explicit parent substitutions and mandatory distinct-variable obligations at every native step. Independent Metamath replay validates the exported result. This establishes correctness for the actual delivered outputs, not completeness of the bounded catalogue or a new deduction theorem.
 
-\textbf{Corollary K.3.} Adding the compiled schemata conservatively extends the original axiom presentation. If the new interface also retains every earlier permitted statement and its applicability frame, its initial one-way coverage cannot decrease.
+\textbf{Corollary F.3.} Adding the compiled schemata conservatively extends the original axiom presentation. If the new interface also retains every earlier permitted statement and its applicability frame, its initial one-way coverage cannot decrease.
 
-\textbf{Proof.} Proposition K.2 derives every added schema from the original axioms, so replacing its uses by those proofs eliminates every added lemma reference. Retaining each earlier permitted statement preserves every one of its admissible substitution instances. Both claims concern logical access, not the schedule or CPU that a search procedure spends exploring it. \(\square\)
+\textbf{Proof.} Proposition F.2 derives every added schema from the original axioms, so replacing its uses by those proofs eliminates every added lemma reference. Retaining each earlier permitted statement preserves every one of its admissible substitution instances. Both claims concern logical access, not the schedule or CPU that a search procedure spends exploring it. \(\square\)
 
-A larger interface can dilute sampling and increase applicability checks. Hence Corollary K.3 does not order future coverage under a fixed budget. The common-residual and cold-cost endpoints test precisely that missing computational property.
+A larger interface can dilute sampling and increase applicability checks. Hence Corollary F.3 does not order future coverage under a fixed budget. The common-residual and cold-cost endpoints test precisely that missing computational property.
 
-\subsection*{K.3. Finite catalogue and source profile}\label{k.3.-finite-catalogue-and-source-profile}
-\addcontentsline{toc}{subsection}{K.3. Finite catalogue and source profile}
+\subsection*{F.3. Finite catalogue and source profile}\label{f.3.-finite-catalogue-and-source-profile}
+\addcontentsline{toc}{subsection}{F.3. Finite catalogue and source profile}
 
 Ordered binary trees with \(k\) internal MP nodes supply \({Cat}_{k}\) shapes and \(k + 1\) boundary positions. Enumerating their equality partitions and the discharge orders gives the elementary finite upper bound
 
@@ -454,10 +460,10 @@ For the adaptive score, the programme walker composes every parent substitution 
 
 The fixed control pools these same features over the six earlier development sources and locks its 12 extended entries. The random control samples 12 entries with a frozen seed, whereas the full control supplies all 201 beyond the short common set. Every arm preserves the preceding compressed interface and runs the same upper codec after importing its chosen certificates. That codec can add further support definitions, so equal catalogue quotas do not imply equal final anchor counts or bytes.
 
-\subsection*{K.4. Native source construction and permitted continuation}\label{k.4.-native-source-construction-and-permitted-continuation}
-\addcontentsline{toc}{subsection}{K.4. Native source construction and permitted continuation}
+\subsection*{F.4. Native source construction and permitted continuation}\label{f.4.-native-source-construction-and-permitted-continuation}
+\addcontentsline{toc}{subsection}{F.4. Native source construction and permitted continuation}
 
-The common source inherits the proof-closed 2,708-record library from Appendix J. Its elementary kernel checks types, contexts, distinct-variable conditions, and substitutions. The cumulative adapter retains the earlier premise-pair model on its supported pure implication/negation sublanguage; other native syntax receives the declared intrinsic fallback score. No experiment here validates learned transfer to arbitrary ZFC syntax.
+The common source inherits the proof-closed 2,708-record library from Appendix E. Its elementary kernel checks types, contexts, distinct-variable conditions, and substitutions. The cumulative adapter retains the earlier premise-pair model on its supported pure implication/negation sublanguage; other native syntax receives the declared intrinsic fallback score. No experiment here validates learned transfer to arbitrary ZFC syntax.
 
 During source construction, the fixed half-filter and deferred queue operate together. The queue holds at most 32,768 opportunities, the active derived-premise cap equals 128, the ordinary fragment selector reserves four positions, and rot-pruning uses eight idle blocks with no earlier productive use and no protected lease. A block contains 16 ordinary opportunities. The upper codec preserves the accumulated interface and does not restrict it to the 128-place construction frontier.
 
@@ -465,8 +471,8 @@ The neutral continuer receives a physical proof-closure projection of the chosen
 
 Uniform continuation samples from allowed premises. Mixed continuation cycles through uniform, bridging, contracting, and frontier sampling in blocks of 16 opportunities. Both retain the existing generalisation sampler and perform the same native admissibility checks. They clear inherited reuse and builder control state, retain newly admitted results, and apply no new human-conditioned choice. The fixed mixed policy depends on certificate identifiers, so its comparison does not establish representation-invariant utility.
 
-\subsection*{K.6. Tested adaptive catalogue score}\label{k.6.-tested-adaptive-catalogue-score}
-\addcontentsline{toc}{subsection}{K.6. Tested adaptive catalogue score}
+\subsection*{F.5. Tested adaptive catalogue score}\label{f.5.-tested-adaptive-catalogue-score}
+\addcontentsline{toc}{subsection}{F.5. Tested adaptive catalogue score}
 
 The native confirmation fixes a common catalogue of 217 delivered schemata from programmes with at most three open MP nodes. Every arm receives the 16 delivered outputs of the short subgrammar with at most two nodes. The adaptive arm selects 12 additional outputs using only the new part of its source proof DAG. The quota matches the number of selected catalogue outputs, not total anchors, certificate support, or a universal compression threshold.
 
@@ -476,18 +482,18 @@ For each structural feature \(f\), the source profile counts correctly instantia
 
 This score favours recurrent multistep patterns while charging description length. A deterministic identifier order breaks ties. It estimates reuse from the source's past and neither trains on human targets nor predicts a causal reduction in future proving work. The fixed control applies the same ranking to pooled earlier development profiles and locks its 12 entries before the new sources run; random and whole-catalogue controls test two alternatives. The catalogue itself costs computation: every arm receives the full recorded cold catalogue charge.
 
-\section*{Appendix L. Frozen native holdout and audit}\label{appendix-l.-frozen-native-holdout-and-audit}
-\addcontentsline{toc}{section}{Appendix L. Frozen native holdout and audit}
+\section*{Appendix G. Frozen native holdout and audit}\label{appendix-g.-frozen-native-holdout-and-audit}
+\addcontentsline{toc}{section}{Appendix G. Frozen native holdout and audit}
 
-\subsection*{L.1. Commitment before held-out outcomes}\label{l.1.-commitment-before-held-out-outcomes}
-\addcontentsline{toc}{subsection}{L.1. Commitment before held-out outcomes}
+\subsection*{G.1. Commitment before held-out outcomes}\label{g.1.-commitment-before-held-out-outcomes}
+\addcontentsline{toc}{subsection}{G.1. Commitment before held-out outcomes}
 
 The original v2 native package froze the corpus, source states, algorithms, catalogue, quotas, budgets, code, and decision rule before its search started. Its local seal supplies a content commitment, not an externally registered or authenticated timestamp. The single corpus commitment also prevents an ordinary launcher call from silently preparing another confirmation with the same target pool.
 
 Input checks exclude the nine named-constant files before the seal and any confirmation trajectory. Technical checks use only the older reference and cannot contribute evidence of held-out superiority.
 
-\subsection*{L.2. Corpus and exclusions}\label{l.2.-corpus-and-exclusions}
-\addcontentsline{toc}{subsection}{L.2. Corpus and exclusions}
+\subsection*{G.2. Corpus and exclusions}\label{g.2.-corpus-and-exclusions}
+\addcontentsline{toc}{subsection}{G.2. Corpus and exclusions}
 
 A strict parser reads theorem terms without executing TPTP or Prolog code and never extracts archive members into arbitrary paths. The parser admits universally quantified formulae over implication, negation, and wff variables, rejects unknown functions or free variables, and canonicalises variable names by first occurrence. Nine files with named truth or falsehood constants remain outside this declared language.
 
@@ -495,8 +501,8 @@ We compare the remaining formulae with every supplied statement in the earlier 9
 
 POI derives from the core of a July 2025 Metamath revision and converts essential hypotheses into implication antecedents. The native source uses its separately pinned explicit basis. Their common ancestry limits distributional independence, even though no retained POI target supplies a training label or an earlier recorded native score. The experiment tests previously unscored target formulae, not an unseen mathematical tradition or external-prover superiority.
 
-\subsection*{L.3. Frozen arms and clocks}\label{l.3.-frozen-arms-and-clocks}
-\addcontentsline{toc}{subsection}{L.3. Frozen arms and clocks}
+\subsection*{G.3. Frozen arms and clocks}\label{g.3.-frozen-arms-and-clocks}
+\addcontentsline{toc}{subsection}{G.3. Frozen arms and clocks}
 
 The original attempt uses RNG states 2026102101--2026102116; the disclosed pre-scoring technical replacement uses 2026102201--2026102216. Each runs 1,500 cumulative opportunities over the common inherited library before any arm-specific rule choice. Every arm receives the original source interface and the 16 short catalogue entries. Core adds no extended entry; fixed adds the 12 entries that it selected on older profiles; random adds 12 seeded entries; adaptive adds the 12 entries with the highest source-profile scores; fixed-all adds every extended entry. The remaining upper coding and interface projection follow the same rule.
 
@@ -506,8 +512,8 @@ Cold operational time adds newly measured source reading and construction, the f
 
 The formula bound constrains stored canonical conclusions at 160 nodes. The certificate-height bound equals 256, and the admission guard permits up to one million future events. No guard-induced early stop, failed cell, or missing cell can silently enter a complete-horizon superiority claim. The frozen policy forbids outcome-guided extension, cancellation, or rerunning failed cells as ordinary confirmation.
 
-\subsection*{L.4. Estimands and statistical decision}\label{l.4.-estimands-and-statistical-decision}
-\addcontentsline{toc}{subsection}{L.4. Estimands and statistical decision}
+\subsection*{G.4. Estimands and statistical decision}\label{g.4.-estimands-and-statistical-decision}
+\addcontentsline{toc}{subsection}{G.4. Estimands and statistical decision}
 
 Let \(t_{j,m,p}(u)\) denote the first growth CPU time at which a permitted statement covers target \(u\) for source \(j\), method \(m\), and continuer \(p\). Unreached targets carry infinite first-cover time. Define the two scores
 
@@ -525,22 +531,22 @@ This test assumes exchangeability of paired signs under its null; the source sta
 
 Zero or nearly identical residual coverage cannot rank semantic quality. Failure to satisfy the rule therefore means no confirmed adaptive superiority on this test, not equivalence of methods or a proof that useful adaptation cannot exist. We retain the locked outcome and do not choose new weights on these targets.
 
-\subsection*{L.5. Audit procedure and the original pre-scoring interruption}\label{l.5.-audit-procedure-and-the-original-pre-scoring-interruption}
-\addcontentsline{toc}{subsection}{L.5. Audit procedure and the original pre-scoring interruption}
+\subsection*{G.5. Audit procedure and the original pre-scoring interruption}\label{g.5.-audit-procedure-and-the-original-pre-scoring-interruption}
+\addcontentsline{toc}{subsection}{G.5. Audit procedure and the original pre-scoring interruption}
 
 Blind workers read only committed code, construction inputs, and protocol metadata; they do not read target bytes. A receipt hashes every completed source block. The evaluator verifies all 16 receipts before it creates an exclusive opening record, loads targets, and observes previously committed trajectories. No interim target score can control the search. This separation enforces the software workflow rather than an operating-system barrier against deliberate manual access.
 
 The evaluator records exact and one-way first hits, covering statements, and explicit substitution witnesses. Every credited target receives an instance certificate for independent Metamath verification. The auditor separately reconstructs permitted premises, new hidden-support witnesses, initial interface projection, and upper coding; it recomputes target-oriented earliest hits independently of the producer's aggregate counts. It then rebuilds each residual set and both endpoints, recomputes the paired tests and correction, and checks the scientific conclusion against all eligibility gates.
 
-\subsection*{L.6. Disclosed technical amendment before scoring}\label{l.6.-disclosed-technical-amendment-before-scoring}
-\addcontentsline{toc}{subsection}{L.6. Disclosed technical amendment before scoring}
+\subsection*{G.6. Disclosed technical amendment before scoring}\label{g.6.-disclosed-technical-amendment-before-scoring}
+\addcontentsline{toc}{subsection}{G.6. Disclosed technical amendment before scoring}
 
 The repaired importer computes a descendant's axiom origins from the destination parents that its certificate actually cites. Canonical duplicates retain their existing first proof. The patch changes neither the checking kernel nor the logical axiom base, and every imported step must still satisfy all proof, substitution, and distinct-variable checks. A new regression test supplies identical axiom schemata under different source labels and verifies the merged result through official Metamath.
 
-It retains the same unopened 963-target pool, hypothesis, model, inherited library, rule catalogue, quotas, clocks, controls, and success rule, but uses fresh source states 2026102201--2026102216. It imports no earlier blind trajectory or score. The four completed blocks from the failed attempt remain outside its sample. The replacement subsequently completes all 16 blocks and 160 continuations; the pipeline then evaluates the results once and runs an independent audit. It follows a technical failure before the first target score; it does not supply an independent replication or a new mathematical corpus. Section L.7 records its actual scientific outcome.
+It retains the same unopened 963-target pool, hypothesis, model, inherited library, rule catalogue, quotas, clocks, controls, and success rule, but uses fresh source states 2026102201--2026102216. It imports no earlier blind trajectory or score. The four completed blocks from the failed attempt remain outside its sample. The replacement subsequently completes all 16 blocks and 160 continuations; the pipeline then evaluates the results once and runs an independent audit. It follows a technical failure before the first target score; it does not supply an independent replication or a new mathematical corpus. Section G.7 records its actual scientific outcome.
 
-\subsection*{L.7. Completed comparison and independent audit}\label{l.7.-completed-comparison-and-independent-audit}
-\addcontentsline{toc}{subsection}{L.7. Completed comparison and independent audit}
+\subsection*{G.7. Completed comparison and independent audit}\label{g.7.-completed-comparison-and-independent-audit}
+\addcontentsline{toc}{subsection}{G.7. Completed comparison and independent audit}
 
 The corrected run completes all 16 blind blocks and 160 continuations before the evaluator opens the 963 targets. Both registered horizons finish in every cell, and the common residual remains informative. The selector supplies three distinct extended-rule sets. Its scientific outcome follows the frozen rule: no confirmed adaptive superiority (Table S3).
 
@@ -653,11 +659,11 @@ The independent checker passes all 16 source blocks and 160 cells. It reconstruc
 
 The complete registered report remains available in the frozen package, including all arms and paired outcomes. We neither retune on these targets nor infer equivalence from the failed superiority test. The fixed repertoire supplies the working configuration, not a post-hoc claim that it beats every alternative.
 
-\section*{Appendix N. Cumulative skeleton networks}\label{appendix-n.-cumulative-skeleton-networks}
-\addcontentsline{toc}{section}{Appendix N. Cumulative skeleton networks}
+\section*{Appendix H. Cumulative skeleton networks}\label{appendix-h.-cumulative-skeleton-networks}
+\addcontentsline{toc}{section}{Appendix H. Cumulative skeleton networks}
 
-\subsection*{N.1. Projections and representative choice}\label{n.1.-projections-and-representative-choice}
-\addcontentsline{toc}{subsection}{N.1. Projections and representative choice}
+\subsection*{H.1. Projections and representative choice}\label{h.1.-projections-and-representative-choice}
+\addcontentsline{toc}{subsection}{H.1. Projections and representative choice}
 
 The new descriptive study reads only audited initial libraries from the corrected holdout. Each projection includes every available anchor, all 29 basis roots, and every necessary certificate ancestor. The projection joins each parent to the conclusion and collapses duplicate arcs. Hidden ancestors retain proof roles but no automatic search rights. The first source, 2026102201, supplies both representatives. The main text uses its fixed quota-matched control because adaptive ranking failed the registered rule; the image below retains the adaptive representative that we chose before scoring. This editorial fallback does not relabel adaptive as an effective method or select the highest-performing control.
 
@@ -669,8 +675,8 @@ Panels a, c, and d retain their old graph hashes and layouts. Panels c and d als
 \caption{Preselected adaptive test variant on the same basis. Panel b uses adaptive initial source 2026102201, not the best continuation or target-coverage result. The remaining panels retain the frozen Metamath and height-three graphs and layouts. This graph illustrates a tested variant without an established adaptive advantage}\label{fig:14}
 \end{figure}
 
-\subsection*{N.2. Profiles across all source states}\label{n.2.-profiles-across-all-source-states}
-\addcontentsline{toc}{subsection}{N.2. Profiles across all source states}
+\subsection*{H.2. Profiles across all source states}\label{h.2.-profiles-across-all-source-states}
+\addcontentsline{toc}{subsection}{H.2. Profiles across all source states}
 
 Every source contributes one initial library for each of the two reported methods, not two independent theories. Anchors exclude basis roots; certificate vertices include roots and hidden support. C denotes mean local clustering, L the exact mean path on the largest undirected component, Q the best modularity across three Louvain starts, and Q0 the mean over ten simple degree-preserving null graphs. Every new observed and null graph uses all BFS sources.
 
@@ -842,8 +848,8 @@ Table S6 reports the adaptive-test initial skeletons in the same source order.
 
 Mean anchors: 673.4375; mean certificate vertices: 843.9375; mean modularity: 0.6243.
 
-\subsection*{N.3. Tail diagnostics and reproducibility}\label{n.3.-tail-diagnostics-and-reproducibility}
-\addcontentsline{toc}{subsection}{N.3. Tail diagnostics and reproducibility}
+\subsection*{H.3. Tail diagnostics and reproducibility}\label{h.3.-tail-diagnostics-and-reproducibility}
+\addcontentsline{toc}{subsection}{H.3. Tail diagnostics and reproducibility}
 
 For each outgoing distinct-use profile, the diagnostic uses 20,000 bootstrap draws for the exact discrete pure power-law family and refits the threshold and exponent in every draw. The earlier in-degree and undirected-degree alternatives remain secondary descriptions. Conditional tail diagnostics do not assume independent graph replicates or establish a limiting law. Small-world ratios compare clustering and largest-component paths with ten degree-preserving controls, not a universal classifier.
 
