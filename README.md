@@ -17,6 +17,7 @@ recommended configuration.
 
 - [Code, dependencies, tests, and reproduction boundaries](docs/ARTICLE1_REPRODUCIBILITY.md)
 - [Compact checked results and provenance](release/article1/README.md)
+- [Shortened manuscript, supporting appendices, and untouched full source](release/article1/manuscript/README.md)
 
 ## Code map
 
@@ -34,7 +35,7 @@ Only the main native workflow forms the supported experiment interface. Shared
 modules remain as its dependencies, not as separate experiment launchers. All
 five registered comparison arms remain: `core`, `fixed`, `random`, `adaptive`,
 and `fixed_all`. This focused release excludes shell launchers, earlier study
-drivers, graph-analysis tooling, manuscript files, and editorial tools.
+drivers and graph-analysis tooling.
 
 ## Install and test
 
@@ -70,7 +71,7 @@ cluster jobs.
 ## Repository boundaries
 
 Generated outputs, raw trajectories, local agent worktrees, caches, private
-research notes, manuscript files, and submission materials remain outside Git.
+research notes and submission-system materials remain outside Git.
 This repository starts from a clean source snapshot on `main`. The original
 working copy, earlier Git history, and frozen experimental records remain in the
 local research archive. Historical presentations, research diaries, and obsolete

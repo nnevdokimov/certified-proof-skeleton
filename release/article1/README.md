@@ -1,6 +1,6 @@
 # Article 1: compact audited results
 
-This directory publishes a compact, derived summary of the completed native-method check and its descriptive network profiles. It contains no manuscript, target formulae, raw trajectories, or personal contact information.
+This directory publishes a compact, derived summary of the completed native-method check and its descriptive network profiles. The separate [manuscript package](manuscript/README.md) contains the shortened article, supporting appendices, and the untouched full source. Target formulae and raw trajectories remain outside this compact release.
 
 ## What the results establish
 

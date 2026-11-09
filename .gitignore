@@ -56,6 +56,21 @@
 !/release/article1/holdout_results.json
 !/release/article1/network_profiles.json
 !/release/article1/provenance.json
+!/release/article1/manuscript/
+
+/release/article1/manuscript/*
+!/release/article1/manuscript/README.md
+!/release/article1/manuscript/main.tex
+!/release/article1/manuscript/main.pdf
+!/release/article1/manuscript/supporting_appendices.tex
+!/release/article1/manuscript/supporting_appendices.pdf
+!/release/article1/manuscript/original_full.tex
+!/release/article1/manuscript/shorten_manuscript.py
+!/release/article1/manuscript/edit_manifest.json
+!/release/article1/manuscript/validation.json
+!/release/article1/manuscript/sn-jnl.cls
+!/release/article1/manuscript/sn-basic.bst
+!/release/article1/manuscript/Fig*.png
 
 /scripts/*
 !/scripts/audit_native_holdout.py
