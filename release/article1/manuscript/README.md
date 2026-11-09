@@ -5,6 +5,9 @@ This package shortens the final two-author Springer Nature source prepared on
 10 November consistency pass makes targeted replacements in the abstract,
 introduction, related work, Algorithm 1, and corpus-provenance paragraph;
 removes the unused exact-match metric; and renumbers the appendices.
+A subsequent language pass favours active, specific verbs, replaces avoidable
+nominalisations, unpacks noun stacks and crowded clauses, and retains Oxford
+commas in serial lists. Formal terms and original publication titles remain.
 Author details, retained mathematics, table cells, funding, and availability
 statements retain their original wording and values.
 
@@ -19,6 +22,7 @@ statements retain their original wording and values.
   additional file to upload as the main manuscript.
 - `edit_manifest.json`: deletion record, exact targeted replacements, restored
   proof, source digest, and mechanical number maps.
+- `style_edits.json`: exact before/after replacements for the language pass.
 - `shorten_manuscript.py`: deterministic editorial transformation; launches no
   experiments and recalculates no scientific results.
 - `validation.json`: content-preservation and PDF build checks.

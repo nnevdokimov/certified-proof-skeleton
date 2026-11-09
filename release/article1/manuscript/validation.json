@@ -2,13 +2,13 @@
   "date": "2026-11-10",
   "original_pdf_pages": 98,
   "base_shortening_deletion_only": true,
-  "current_edit_scope": "Approved targeted consistency corrections, simultaneous renumbering, restored proof, and pagination only",
+  "current_edit_scope": "56 declared language replacements and one pagination control only",
   "only_declared_edits_since_previous_commit": true,
   "continuous_appendices_and_resolved_references": true,
   "restored_core_bound_identical_to_original": true,
   "table_S4_positive_signs_preserved": true,
   "untouched_original_source": true,
-  "abstract_change": "Removed passive-library clause only",
+  "abstract_change": "None in this language pass",
   "images_sha256": {
     "Fig6.png": "116a8b884bfef6d732e42a5886e54c4211905429e1cb514711b95a303499005a",
     "Fig14.png": "ff06d88cc5ddac724d0f1b0614b94b484dc402030358312ec05dacd798bfac59",
@@ -29,14 +29,14 @@
     "main": {
       "pages": 26,
       "tables_unchanged_since_previous_commit": 4,
-      "retained_math_expressions_identical_to_original": 95,
+      "all_retained_math_identical_to_previous_commit": true,
+      "retained_math_expression_count": 95,
+      "scientific_numerical_tokens_unchanged": true,
       "citations_resolved": 33,
       "latex_errors": [],
-      "overfull_warnings": [
-        "Overfull \\vbox (1.68297pt too high) has occurred while \\output is active []"
-      ],
-      "tex_sha256": "071ae96c8788c789136cc914eef6c79f39407bf416f4d0d99694aa791ef27a42",
-      "pdf_sha256": "853f24fac73a8040a8e7166fc139dca9ca50258c658e38dae0ca4c52f5326270",
+      "overfull_warnings": [],
+      "tex_sha256": "6ac3bbd97eaf4dd3c623124b39588da4927f6463e523390b12da815a98812892",
+      "pdf_sha256": "340cdfc758fcbf8fbce2cfe893cae77b1088d1620fa5eb0686d495febdd28e1f",
       "visual_review_pages": [
         1,
         2,
@@ -69,12 +69,14 @@
     "supporting_appendices": {
       "pages": 24,
       "tables_unchanged_since_previous_commit": 6,
-      "retained_math_expressions_identical_to_original": 219,
+      "all_retained_math_identical_to_previous_commit": true,
+      "retained_math_expression_count": 219,
+      "scientific_numerical_tokens_unchanged": true,
       "citations_resolved": 2,
       "latex_errors": [],
       "overfull_warnings": [],
-      "tex_sha256": "637a02781267ca9611542372fe7895ed5a4da2c7212f57708f9ac0203d37b459",
-      "pdf_sha256": "53044ef22bb7f614d5b4ab26c6fe933063fad59472437bf3e5c6d66b88b60a2c",
+      "tex_sha256": "4098f5ccace4d200a8b4bbad112b576eb50538c9bc1bf6e5b749a04f4186c113",
+      "pdf_sha256": "bb0631866075bdf1a1405bf339c366ed7bc5de16a140cf6c106f769886b3e6a5",
       "visual_review_pages": [
         1,
         2,
@@ -103,5 +105,19 @@
       ]
     }
   },
-  "visual_review": "All 26 main and 24 supporting pages inspected in rendered contact sheets. Supporting pages 12 (restored proof) and 19 (positive table signs) inspected at 150 dpi. No clipping or overlap observed. Main page 3 retains the previously checked harmless 1.683 pt vertical box warning."
+  "visual_review": "All 26 main and 24 supporting pages inspected in rendered contact sheets; no clipping or overlap observed. Theorem 1 now stays with its displayed bound. Both final logs contain no overfull boxes, undefined references, or missing glyph warnings.",
+  "baseline_commit": "3e2e6991fda74568c243134904e6b017092ad23f",
+  "style_review": {
+    "edits": {
+      "main.tex": 30,
+      "supporting_appendices.tex": 26
+    },
+    "finite_passive_voice": "No finite passive constructions found in author prose; avoidable reduced passive phrases rewritten",
+    "be_have_forms_in_author_prose": 0,
+    "bibliography_exception": "Original title: Scale-free networks are rare",
+    "nominalisations": "Avoidable nominalised frames rewritten; formal technical terms retained",
+    "clutter": "Noun stacks unpacked and crowded clauses split",
+    "oxford_comma": "Serial lists manually reviewed; original publication titles retained"
+  },
+  "author_details_funding_availability_unchanged": true
 }

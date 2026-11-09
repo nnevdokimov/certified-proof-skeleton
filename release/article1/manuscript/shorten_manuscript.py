@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reproduce the editorial cut and the approved consistency corrections.
+"""Reproduce the editorial cut, consistency corrections, and language pass.
 
 No scientific run, model fitting, or result recalculation occurs here.
 The untouched input is original_full.tex beside this script.
@@ -250,11 +250,32 @@ def prune_bibliography(text, document):
 
 main = prune_bibliography(main, "main")
 support = prune_bibliography(support, "support")
+
+# Subsequent user-requested language pass: keep every replacement explicit,
+# preserve mathematics, numerical tokens, tables, titles, and bibliography.
+style_path = ROOT / "style_edits.json"
+style_edits = json.loads(style_path.read_text())
+style_inputs = {"main.tex": main, "supporting_appendices.tex": support}
+styled = dict(style_inputs)
+for edit in style_edits:
+    file = edit["file"]
+    assert styled[file].count(edit["before"]) == 1, edit["reason"]
+    assert styled[file].index(edit["before"]) < styled[file].index(BIB)
+    styled[file] = styled[file].replace(edit["before"], edit["after"], 1)
+for file, before in style_inputs.items():
+    after = styled[file]
+    assert before[before.index(BIB):] == after[after.index(BIB):]
+    for pattern in [r"\\\[.*?\\\]|\\\(.*?\\\)",
+                    r"\\begin\{longtable\}.*?\\end\{longtable\}",
+                    r"\\emph\{[^}]*\}", r"\b\d+(?:[.,]\d+)*"]:
+        assert re.findall(pattern, before, re.S) == re.findall(pattern, after, re.S), (file, pattern)
+main, support = styled["main.tex"], styled["supporting_appendices.tex"]
+main = main.replace(r"\textbf{Theorem 1.}", r"\Needspace{5\baselineskip}" + "\n" + r"\textbf{Theorem 1.}", 1)
 (ROOT / "main.tex").write_text(main)
 (ROOT / "supporting_appendices.tex").write_text(support)
 manifest = {
     "source": "original_full.tex", "source_sha256": sha(SOURCE),
-    "operation": "Deletion-only base shortening followed by approved targeted consistency corrections",
+    "operation": "Deletion-only base shortening, approved consistency corrections, and requested language pass",
     "base_main_deletion_only_before_numbering": is_subsequence(main_before_numbering, SOURCE),
     "main_pre_numbering_sha256": sha(main_before_numbering),
     "main_sha256": sha(main), "support_sha256": sha(support),
@@ -263,12 +284,17 @@ manifest = {
     "support_figure_number_map": support_figures,
     "appendix_number_map": appendix_map, "appendix_subsection_exception": {"K.6": "F.5"},
     "targeted_revisions": revisions,
+    "style_edits_file": "style_edits.json",
+    "style_edits_sha256": sha(style_path.read_text()),
+    "style_input_sha256": {file: sha(text) for file, text in style_inputs.items()},
+    "style_edits_count": {file: sum(e["file"] == file for e in style_edits) for file in style_inputs},
     "restored": {"original_section": "J.4", "destination_section": "E.3",
                  "text_sha256": sha(format_bound), "text": format_bound},
     "technical_exceptions": ["Mechanical heading and cross-reference renumbering",
                              "Supporting-PDF subtitle and S-prefixed object counters",
                              "Continuous appendix lettering, labels, and cross-references",
-                             "Keep the locked-comparison table together; set main bibliography spacing to 0.7em"],
+                             "Keep the locked-comparison table together; set main bibliography spacing to 0.7em",
+                             "Keep the Theorem 1 statement with its displayed bound after the language pass"],
     "preserved": ["Original full source unchanged", "All retained numerical results and table cells",
                   "144-source continuation results", "16-source 963-target negative adaptive comparison",
                   "Main network comparison", "Technical amendment disclosure in supporting Appendix G",
@@ -280,4 +306,5 @@ manifest = {
 print(json.dumps({"main_characters": len(main), "support_characters": len(support),
                   "main_tables": main_tables, "main_figures": main_figures,
                   "base_deleted_main_characters": manifest["removed_characters_base_main_before_numbering"],
-                  "targeted_revisions": len(revisions), "appendix_number_map": appendix_map}, indent=2))
+                  "targeted_revisions": len(revisions), "style_edits": manifest["style_edits_count"],
+                  "appendix_number_map": appendix_map}, indent=2))

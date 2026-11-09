@@ -1,11 +1,11 @@
 {
   "source": "original_full.tex",
   "source_sha256": "d4a9b0d92879dbe391a0f3e63a73c5b0e3d8d1d16beecf6e2856a3e53802c316",
-  "operation": "Deletion-only base shortening followed by approved targeted consistency corrections",
+  "operation": "Deletion-only base shortening, approved consistency corrections, and requested language pass",
   "base_main_deletion_only_before_numbering": true,
   "main_pre_numbering_sha256": "025ad4b52e9533d37f7c220ad710a387bb12943eda8e7535ba6ac4932a050ef4",
-  "main_sha256": "071ae96c8788c789136cc914eef6c79f39407bf416f4d0d99694aa791ef27a42",
-  "support_sha256": "637a02781267ca9611542372fe7895ed5a4da2c7212f57708f9ac0203d37b459",
+  "main_sha256": "6ac3bbd97eaf4dd3c623124b39588da4927f6463e523390b12da815a98812892",
+  "support_sha256": "4098f5ccace4d200a8b4bbad112b576eb50538c9bc1bf6e5b749a04f4186c113",
   "main_section_number_map": {
     "2.1": "2.1",
     "2.2": "2.2",
@@ -115,6 +115,16 @@
       "after": "Development diagnostics measure human-statement coverage after a run; a separate locked comparison evaluates a previously unscored target pool."
     }
   ],
+  "style_edits_file": "style_edits.json",
+  "style_edits_sha256": "4e6c176cbd874080996bb6b1b65682eb466b85ec0400b52544de948ddbd169a5",
+  "style_input_sha256": {
+    "main.tex": "071ae96c8788c789136cc914eef6c79f39407bf416f4d0d99694aa791ef27a42",
+    "supporting_appendices.tex": "637a02781267ca9611542372fe7895ed5a4da2c7212f57708f9ac0203d37b459"
+  },
+  "style_edits_count": {
+    "main.tex": 30,
+    "supporting_appendices.tex": 26
+  },
   "restored": {
     "original_section": "J.4",
     "destination_section": "E.3",
@@ -125,7 +135,8 @@
     "Mechanical heading and cross-reference renumbering",
     "Supporting-PDF subtitle and S-prefixed object counters",
     "Continuous appendix lettering, labels, and cross-references",
-    "Keep the locked-comparison table together; set main bibliography spacing to 0.7em"
+    "Keep the locked-comparison table together; set main bibliography spacing to 0.7em",
+    "Keep the Theorem 1 statement with its displayed bound after the language pass"
   ],
   "preserved": [
     "Original full source unchanged",

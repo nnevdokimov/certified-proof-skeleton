@@ -1,0 +1,338 @@
+[
+  {
+    "file": "main.tex",
+    "before": "Comparing the graph of all formally correct mathematical statements with the graph of those that humanity regards as theorems and lemmas \\citep{MetamathSetMMPinned} reveals a striking difference (see Section 7.3).",
+    "after": "The graph of all formally correct mathematical statements differs from the graph of statements that humanity treats as theorems and lemmas \\citep{MetamathSetMMPinned} (see Section 7.3).",
+    "reason": "Replace an indirect opening with a direct verb"
+  },
+  {
+    "file": "main.tex",
+    "before": "This concept readily extends to any formalisable knowledge system, where we call it a semantic skeleton of formal knowledge.",
+    "after": "We extend this concept to any formalisable knowledge system and call the resulting structure a semantic skeleton of formal knowledge.",
+    "reason": "Give the action an explicit subject and remove filler"
+  },
+  {
+    "file": "main.tex",
+    "before": "We measure new canonical formulae, resource costs, and additional coverage of a common initially uncovered set of human statements.",
+    "after": "We measure new canonical formulae, resource costs, and additional coverage of a common set of human statements that no method initially covers.",
+    "reason": "Unpack stacked modifiers without changing the common residual"
+  },
+  {
+    "file": "main.tex",
+    "before": "The comparison separates proof preservation, shorter expanded representations, and productive subsequent search.",
+    "after": "We separately test whether the method preserves proofs, shortens expanded representations, and supports productive subsequent search.",
+    "reason": "Replace abstract nouns with parallel active verbs"
+  },
+  {
+    "file": "main.tex",
+    "before": "We build on this methodological precedent through continuous certified growth, reversible activity control, and bounded retention leases whose costs we measure.",
+    "after": "We build on this precedent by growing certified knowledge continuously, reversibly controlling activity, and measuring the costs of bounded retention leases.",
+    "reason": "Replace nominalised actions with verbal clauses and keep the serial comma"
+  },
+  {
+    "file": "main.tex",
+    "before": "changes in proving work after lemma addition",
+    "after": "how proving work changes after they add lemmas",
+    "reason": "Replace addition with an active clause"
+  },
+  {
+    "file": "main.tex",
+    "before": "universal human lemma value",
+    "after": "universal value of lemmas for human mathematics",
+    "reason": "Unpack a noun stack"
+  },
+  {
+    "file": "main.tex",
+    "before": "Our setting adds competition for a bounded number of active-premise slots.",
+    "after": "In our setting, premises compete for a bounded number of active slots.",
+    "reason": "Replace competition with its verb and subject"
+  },
+  {
+    "file": "main.tex",
+    "before": "The contribution combines these mechanisms with explicit access permissions and tests their incremental effects over fixed controls.",
+    "after": "We combine these mechanisms with explicit access permissions and test their incremental effects against fixed controls.",
+    "reason": "Use an explicit subject rather than an abstract contribution"
+  },
+  {
+    "file": "main.tex",
+    "before": "certificate dependencies satisfy well-foundedness",
+    "after": "certificate dependencies follow a well-founded order",
+    "reason": "Replace a nominalised predicate with a direct relation"
+  },
+  {
+    "file": "main.tex",
+    "before": "Exhaustive representation with a separate record for each such formula requires exponentially many records in \\(L\\).",
+    "after": "An exhaustive store that retains each such formula separately requires exponentially many records in \\(L\\).",
+    "reason": "Replace an abstract storage phrase with a concrete subject"
+  },
+  {
+    "file": "main.tex",
+    "before": "Only the initial axioms receive permanent protection in the working set.",
+    "after": "The policy permanently protects only the initial axioms in the working set.",
+    "reason": "Name the actor and use protects"
+  },
+  {
+    "file": "main.tex",
+    "before": "Per-layer selection width and total active-set size remain separate parameters.",
+    "after": "The policy sets per-layer selection width separately from total active-set size.",
+    "reason": "Replace a weak relational verb with an explicit action"
+  },
+  {
+    "file": "main.tex",
+    "before": "Closure excludes unproven open premises, not schema variables; expansion follows each internal vertex's archived premises in their original order.",
+    "after": "A closed fragment excludes unproven open premises but may contain schema variables. To expand it, the checker follows each internal vertex's archived premises in their original order.",
+    "reason": "Unpack closure and expansion into concrete clauses"
+  },
+  {
+    "file": "main.tex",
+    "before": "If selection starts from an empty library and admits only strictly positive increments",
+    "after": "If the selector starts from an empty library and admits only strictly positive increments",
+    "reason": "Name the selector as the actor"
+  },
+  {
+    "file": "main.tex",
+    "before": "The lemma certifies exact recovery of the original proofs and a non-negative code-length gain on the selection forest.",
+    "after": "The lemma guarantees that the codec recovers the original proofs without increasing code length on the selection forest.",
+    "reason": "Replace recovery and gain with equivalent verbal claims"
+  },
+  {
+    "file": "main.tex",
+    "before": "whereas an epoch denotes a point at which the program updates search state",
+    "after": "whereas an epoch marks when the program updates search state",
+    "reason": "Remove a wordy clause"
+  },
+  {
+    "file": "main.tex",
+    "before": "Complete finite saturation additionally requires fair processing of every rule application that becomes available, a guarantee that the present bounded policy does not establish.",
+    "after": "Complete finite saturation additionally requires the process to execute every available rule application eventually; the present bounded policy does not guarantee that schedule.",
+    "reason": "Spell out the action behind fair processing"
+  },
+  {
+    "file": "main.tex",
+    "before": "Source work, package choice, and continuation enter the reported chain CPU cost.",
+    "after": "The reported chain CPU includes work to build the source, choose packages, and continue search.",
+    "reason": "Replace a nominalised list with parallel verbs"
+  },
+  {
+    "file": "main.tex",
+    "before": "It recalculates nested references and definition costs after each addition and imposes no target dictionary size.",
+    "after": "It recalculates nested references and definition costs whenever it adds a definition and imposes no target dictionary size.",
+    "reason": "Replace addition with an active clause"
+  },
+  {
+    "file": "main.tex",
+    "before": "This distinction explains why candidate counts and delivered-rule counts need not coincide.",
+    "after": "This distinction explains why the number of candidates need not match the number of rules that the compiler delivers.",
+    "reason": "Unpack a noun stack"
+  },
+  {
+    "file": "main.tex",
+    "before": "The mixed engine retains an identifier-dependent frontier preference",
+    "after": "The mixed engine favours frontier statements according to their identifiers",
+    "reason": "Replace an abstract preference with its verb"
+  },
+  {
+    "file": "main.tex",
+    "before": "16 new source random number generator (RNG) states",
+    "after": "16 new states of the random number generator (RNG) for source construction",
+    "reason": "Unpack the source-state noun stack"
+  },
+  {
+    "file": "main.tex",
+    "before": "For each comparison we take the larger p-value from the two endpoints, then apply",
+    "after": "For each comparison, we retain the larger p-value from the two endpoints, then apply",
+    "reason": "Use a precise verb and clarify the introductory phrase"
+  },
+  {
+    "file": "main.tex",
+    "before": "Each table entry averages the two neutral continuers within a source, then averages the 16 sources.",
+    "after": "For each table entry, we first average the two neutral continuers within each source, then average across the 16 sources.",
+    "reason": "Name who computes the two-stage average"
+  },
+  {
+    "file": "main.tex",
+    "before": "The independent audit reconstructs 4,174,478 admission events and 2,846 hidden-support rediscovery witnesses, checks all target positions, and reproduces the endpoints and decision.",
+    "after": "The independent audit reconstructs 4,174,478 admission events and 2,846 witnesses that record how search rediscovers hidden support, checks all target positions, and reproduces the endpoints and decision.",
+    "reason": "Unpack the witness noun stack while preserving all counts"
+  },
+  {
+    "file": "main.tex",
+    "before": "Human references expose differences that raw formula counts conceal.  The locked comparison",
+    "after": "Human references expose differences that raw formula counts conceal. The locked comparison",
+    "reason": "Remove duplicated whitespace"
+  },
+  {
+    "file": "main.tex",
+    "before": "None of these corpora supplies a complete modal reference or an assessment of the whole mathematical value of the generated library.",
+    "after": "These corpora neither supply a complete modal reference nor assess the full mathematical value of the generated library.",
+    "reason": "Replace assessment with an active verb"
+  },
+  {
+    "file": "main.tex",
+    "before": "The theoretical results establish conservative proof recovery and the output obstruction to complete explicit storage under fixed capacity.",
+    "after": "The theoretical results show that the method recovers proofs without strengthening the logic and that fixed capacity cannot accommodate a complete explicit representation as the size bound grows.",
+    "reason": "Express the two guarantees through verbs without strengthening either claim"
+  },
+  {
+    "file": "main.tex",
+    "before": "lower mean credited chain CPU",
+    "after": "a lower mean credited CPU cost for the chain",
+    "reason": "Unpack stacked resource modifiers"
+  },
+  {
+    "file": "supporting_appendices.tex",
+    "before": "Reducing new activations limits part of the enumeration, without establishing linear complexity or a constant total active-set size.",
+    "after": "Activating fewer premises limits part of the enumeration, without establishing linear complexity or a constant total active-set size.",
+    "reason": "Replace activations with a verbal phrase"
+  },
+  {
+    "file": "supporting_appendices.tex",
+    "before": "The schematic modus ponens that we use here does admit a direct proof of an unbounded exact graph.",
+    "after": "Schematic modus ponens yields an unbounded exact graph under the conditions below.",
+    "reason": "Replace an abstract proof frame with an explicit subject"
+  },
+  {
+    "file": "supporting_appendices.tex",
+    "before": "imposing that further requirement would require a new size calculation.",
+    "after": "to impose that further requirement, we would need to calculate those sizes separately.",
+    "reason": "Replace calculation with calculate"
+  },
+  {
+    "file": "supporting_appendices.tex",
+    "before": "Archive soundness therefore does not imply preservation of future search opportunities.",
+    "after": "A sound archive therefore does not guarantee that future search retains those opportunities.",
+    "reason": "Replace preservation with an active clause"
+  },
+  {
+    "file": "supporting_appendices.tex",
+    "before": "If selection starts from the empty library and admits only strictly positive increments",
+    "after": "If the selector starts from the empty library and admits only strictly positive increments",
+    "reason": "Name the selector as the actor"
+  },
+  {
+    "file": "supporting_appendices.tex",
+    "before": "Successive expansion of definitions therefore terminates and recovers the original rule applications with the same premise roles; checking the original certificates and the admissibility of their expansion establishes soundness.",
+    "after": "The codec therefore finishes expanding the definitions and recovers the original rule applications with the same premise roles. The checker verifies the original certificates and checks that every expansion remains admissible, establishing soundness.",
+    "reason": "Name the codec and checker and split a crowded sentence"
+  },
+  {
+    "file": "supporting_appendices.tex",
+    "before": "Transport integrity binds the downloaded large journals to the cluster audit; it does not constitute another local logical replay of every elementary proof in those journals.",
+    "after": "Transport checks link the downloaded journals to the cluster audit; they do not replay every elementary proof locally.",
+    "reason": "Replace an abstract integrity frame and unpack the replay stack"
+  },
+  {
+    "file": "supporting_appendices.tex",
+    "before": "These rows expose a genuine trade-off.",
+    "after": "These rows expose a trade-off.",
+    "reason": "Remove an unnecessary qualifier"
+  },
+  {
+    "file": "supporting_appendices.tex",
+    "before": "The basis comprises 25 logical or ZFC assertions, including modus ponens and generalisation, six definitions, and 12 syntax assertions.",
+    "after": "The basis comprises 25 logical or ZFC assertions (including modus ponens and generalisation), six definitions, and 12 syntax assertions.",
+    "reason": "Separate the parenthesis from the three-item serial list"
+  },
+  {
+    "file": "supporting_appendices.tex",
+    "before": "The final layer contributes 10,499 vertices with no observed later use; finite-frontier censoring, rather than established uselessness, explains that observation.",
+    "after": "The final layer contributes 10,499 vertices with no observed later use. These vertices lie on the finite frontier; their lack of later use therefore does not establish uselessness.",
+    "reason": "Unpack a dense technical phrase while retaining the frontier limitation"
+  },
+  {
+    "file": "supporting_appendices.tex",
+    "before": "Let \\(L(D;R)\\) denote the encoded-symbol term in the square brackets of the definition of \\(G(D;R)\\).",
+    "after": "Let \\(L(D;R)\\) denote the code length inside the square brackets in the definition of \\(G(D;R)\\).",
+    "reason": "Simplify nested noun phrases without changing the defined expression"
+  },
+  {
+    "file": "supporting_appendices.tex",
+    "before": "recalculates the expansion after each addition",
+    "after": "recalculates the expansion each time it adds a fragment",
+    "reason": "Replace addition with an active clause"
+  },
+  {
+    "file": "supporting_appendices.tex",
+    "before": "Before the addition, the \\(r\\) occurrences each expand a body of length \\(b\\).",
+    "after": "Before the codec adds the fragment, the \\(r\\) occurrences each expand a body of length \\(b\\).",
+    "reason": "Name the codec and replace addition with adds"
+  },
+  {
+    "file": "supporting_appendices.tex",
+    "before": "During source construction, the fixed half-filter and deferred queue operate together. The queue holds at most 32,768 opportunities, the active derived-premise cap equals 128, the ordinary fragment selector reserves four positions, and rot-pruning uses eight idle blocks with no earlier productive use and no protected lease.",
+    "after": "During source construction, the fixed half-filter and deferred queue operate together. The queue holds at most 32,768 opportunities, and the constructor caps active derived premises at 128. The ordinary fragment selector reserves four positions. Rot-pruning deactivates a premise after eight idle blocks if that premise shows no earlier productive use and holds no protected lease.",
+    "reason": "Split four configuration clauses and use explicit actors"
+  },
+  {
+    "file": "supporting_appendices.tex",
+    "before": "They clear inherited reuse and builder control state, retain newly admitted results, and apply no new human-conditioned choice.",
+    "after": "They clear the state that the reuse mechanism and constructor pass on, retain newly admitted results, and apply no new human-conditioned choice.",
+    "reason": "Unpack the inherited-state noun stack"
+  },
+  {
+    "file": "supporting_appendices.tex",
+    "before": "after the specified definition expansions.",
+    "after": "after we expand the specified definitions.",
+    "reason": "Replace expansions with an active clause"
+  },
+  {
+    "file": "supporting_appendices.tex",
+    "before": "Each arm receives uniform and mixed continuers with matched source-conditioned RNG seeds.",
+    "after": "Within each source, we match RNG seeds across arms separately for the uniform and mixed continuers.",
+    "reason": "Replace a reduced passive and unpack stacked modifiers"
+  },
+  {
+    "file": "supporting_appendices.tex",
+    "before": "Cold operational time adds newly measured source reading and construction, the full recorded catalogue synthesis and certification charge, method setup, rule import, coding, projection, initial export and verification, and continuation setup before future growth.",
+    "after": "The cold operational clock charges CPU time to read and extend the source, synthesise and certify the full catalogue, prepare each method, import rules, code proofs, project the interface, export and verify the initial package, and set up continuation before future growth.",
+    "reason": "Express the cost components through parallel actions and retain the serial comma"
+  },
+  {
+    "file": "supporting_appendices.tex",
+    "before": "No guard-induced early stop, failed cell, or missing cell can silently enter a complete-horizon superiority claim.",
+    "after": "We cannot claim complete-horizon superiority if a guard stops any cell early or any cell fails or remains missing.",
+    "reason": "Name who makes the claim and unpack the nominalised condition"
+  },
+  {
+    "file": "supporting_appendices.tex",
+    "before": "Failure to satisfy the rule therefore means no confirmed adaptive superiority on this test, not equivalence of methods or a proof that useful adaptation cannot exist.",
+    "after": "If a method fails the rule, this test does not confirm adaptive superiority; it establishes neither equivalence nor the impossibility of useful adaptation.",
+    "reason": "Replace failure-to-satisfy with a conditional clause and preserve the negative-result interpretation"
+  },
+  {
+    "file": "supporting_appendices.tex",
+    "before": "This separation enforces the software workflow rather than an operating-system barrier against deliberate manual access.",
+    "after": "This separation enforces the software workflow; it does not impose an operating-system barrier against deliberate manual access.",
+    "reason": "Remove a compressed comparison and state the action explicitly"
+  },
+  {
+    "file": "supporting_appendices.tex",
+    "before": "Every credited target receives an instance certificate for independent Metamath verification.",
+    "after": "The evaluator supplies an instance certificate for every credited target so the independent Metamath verifier can check it.",
+    "reason": "Replace verification with a verbal purpose clause without claiming extra checks"
+  },
+  {
+    "file": "supporting_appendices.tex",
+    "before": "It retains the same unopened 963-target pool, hypothesis, model, inherited library, rule catalogue, quotas, clocks, controls, and success rule, but uses fresh source states",
+    "after": "The replacement package retains the same unopened 963-target pool, hypothesis, model, inherited library, rule catalogue, quotas, clocks, controls, and success rule, but uses fresh source states",
+    "reason": "Replace an orphaned pronoun with its subject"
+  },
+  {
+    "file": "supporting_appendices.tex",
+    "before": "The independent checker passes all 16 source blocks and 160 cells.",
+    "after": "All 16 source blocks and 160 cells pass the independent checker.",
+    "reason": "Give passes its intended active subject"
+  },
+  {
+    "file": "supporting_appendices.tex",
+    "before": "Layout distances across independently scaled panels do not measure comparable semantic proximity (Fig. S2).",
+    "after": "Because each panel uses its own scale, distances across panels do not measure comparable semantic proximity (Fig. S2).",
+    "reason": "Unpack a dense chain of modifiers"
+  },
+  {
+    "file": "supporting_appendices.tex",
+    "before": "Every new observed and null graph uses all BFS sources.",
+    "after": "For every new observed and null graph, we compute paths from every BFS source.",
+    "reason": "Name the action rather than making graphs perform it"
+  }
+]
