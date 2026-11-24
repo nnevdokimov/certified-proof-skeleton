@@ -14,9 +14,9 @@ from skeleton_gate import make_gated_engine
 
 class OpportunityQueue:
     def __init__(self, cap):
-        if cap<1:raise ValueError('Positive queue cap required')
+        if cap is not None and cap<1:raise ValueError('Positive queue cap required')
         self.cap=cap;self.pairs=deque();self.known=set();self.counters=Counter()
-        self.done=deque();self.done_set=set();self.history_cap=cap*4
+        self.done=deque();self.done_set=set();self.history_cap=None if cap is None else cap*4
 
     def add(self, pair):
         pair=tuple(pair)
@@ -24,7 +24,7 @@ class OpportunityQueue:
             self.counters['replayed_offers_ignored']+=1;return
         if pair in self.known:
             self.counters['duplicate_offers']+=1;return
-        if len(self.pairs)>=self.cap:
+        if self.cap is not None and len(self.pairs)>=self.cap:
             self.counters['overflow_rejected']+=1;return
         self.pairs.append(pair);self.known.add(pair);self.counters['enqueued']+=1
 
@@ -36,15 +36,16 @@ class OpportunityQueue:
             if all(i in active for i in pair):
                 self.known.remove(pair);ready.append(pair)
                 self.done.append(pair);self.done_set.add(pair)
-                if len(self.done)>self.history_cap:self.done_set.remove(self.done.popleft())
+                if self.history_cap is not None and len(self.done)>self.history_cap:
+                    self.done_set.remove(self.done.popleft())
             else:
                 self.pairs.append(pair);self.counters['blocked_rotations']+=1
         self.counters['dequeued_for_replay']+=len(ready)
         return ready
 
-    def reservations(self, active, retired, depth, cooldown, slots):
+    def reservations(self, active, retired, depth, cooldown, slots, *, scan=256):
         chosen=[]
-        for pair in islice(self.pairs,256):
+        for pair in islice(self.pairs,scan):
             missing=[i for i in pair if i not in active and i not in chosen]
             if not missing:continue
             if any(depth-retired.get(i,-10**9)<cooldown for i in missing):continue

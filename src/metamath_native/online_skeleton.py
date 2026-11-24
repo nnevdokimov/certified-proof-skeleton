@@ -30,6 +30,29 @@ MODES = ('uniform', 'reuse', 'bridge', 'contract', 'frontier')
 FEATURES = 8
 
 
+class NativeOperations:
+    """Formal-system boundary; default operations preserve the native kernel.
+
+    Controllers, candidate sampling, resource accounting, and admission order
+    remain in OnlineGrowth. Alternate kernels must supply checked proposals;
+    they do not get to replace the search loop.
+    """
+    index = staticmethod(PatternIndex)
+    family = staticmethod(family)
+    statement = staticmethod(statement)
+    instance_witness = staticmethod(instance_witness)
+
+    @staticmethod
+    def generalise(lib, parent, rng):
+        n = lib.nodes[parent]
+        choices = sorted(v for v in variables(n.formula) if v[1] == 'setvar')
+        choices.append(variable('setvar', 'fresh.generalisation'))
+        x = choices[int(rng.integers(len(choices)))]
+        return (('wal', x, n.formula), set(n.disjoint), 'ax-gen',
+                {'ph': n.formula, 'x': x},
+                [(parent, {v[2]: v for v in variables(n.formula)})], n.origins)
+
+
 @dataclass(frozen=True)
 class OnlineConfig:
     attempts: int = 2000
@@ -134,6 +157,7 @@ class OnlineGrowth:
         if config.max_nodes < len(lib.nodes):
             raise ValueError('Node budget smaller than starting library')
         self.lib, self.config = lib, config
+        self.operations = getattr(lib, 'operations', NativeOperations())
         self.rng = np.random.default_rng(seed)
         self.initial_nodes = len(lib.nodes)
         self.counts = Counter()
@@ -143,13 +167,13 @@ class OnlineGrowth:
         self.families = []
         self.major = []
         self.tree_steps = []
-        self.index = PatternIndex()
+        self.index = self.operations.index()
         for n in lib.nodes:
             self._register(n)
 
     def _register(self, n):
         self.sizes.append(size(n.formula))
-        self.families.append(family(n.formula, n.origins))
+        self.families.append(self.operations.family(n.formula, n.origins))
         if n.formula[0] == 'wi':
             self.major.append(n.id)
         self.tree_steps.append(min(10 ** 12, 1 + sum(self.tree_steps[p] for p, _ in n.parents)))
@@ -231,14 +255,8 @@ class OnlineGrowth:
             if gen:
                 available = self.available_ids()
                 parent = available[int(self.rng.integers(len(available)))]
-                choices = sorted(v for v in variables(self.lib.nodes[parent].formula) if v[1] == 'setvar')
-                choices.append(variable('setvar', 'fresh.generalisation'))
-                x = choices[int(self.rng.integers(len(choices)))]
-                n = self.lib.nodes[parent]
-                proposal = (('wal', x, n.formula), set(n.disjoint), 'ax-gen',
-                            {'ph': n.formula, 'x': x},
-                            [(parent, {v[2]: v for v in variables(n.formula)})], n.origins)
                 self.counts['gen_calls'] += 1
+                proposal = self.operations.generalise(self.lib, parent, self.rng)
             else:
                 pair = self.choose_pair(mode)
                 if pair is None:
@@ -257,7 +275,7 @@ class OnlineGrowth:
         if 1 + max(self.lib.nodes[p].height for p, _ in proposal[4]) > self.config.proof_height:
             self.counts['height_rejected'] += 1
             return -.03
-        body, dv = statement(proposal)
+        body, dv = self.operations.statement(proposal)
         if (body, dv) in self.lib.known:
             self.counts['known'] += 1
             return -.02
@@ -265,7 +283,7 @@ class OnlineGrowth:
             for i in self.index.candidates(body):
                 self.counts['subsumption_checks'] += 1
                 n = self.lib.nodes[i]
-                if instance_witness(n.formula, n.disjoint, body, dv) is not None:
+                if self.operations.instance_witness(n.formula, n.disjoint, body, dv) is not None:
                     self.counts['subsumed'] += 1
                     return -.01
         parents = set(p for p, _ in proposal[4])

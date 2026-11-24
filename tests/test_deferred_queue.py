@@ -36,3 +36,16 @@ def test_summary_deterministic_and_history_bounded():
     assert len(queue.done) == 4
     assert queue.summary() == queue.summary()
     assert queue.summary(False)["queue_sha256"] is None
+
+
+def test_unbounded_queue_preserves_fifo_and_replayed_pair_history():
+    queue = OpportunityQueue(None)
+    pairs = [(i, i + 1) for i in range(100)]
+    for pair in pairs:
+        queue.add(pair)
+    assert queue.pop_ready(set(range(101)), len(pairs), len(pairs)) == pairs
+    for pair in reversed(pairs):
+        queue.add(pair)
+    assert not queue.pairs
+    assert len(queue.done_set) == len(pairs)
+    assert queue.counters["overflow_rejected"] == 0

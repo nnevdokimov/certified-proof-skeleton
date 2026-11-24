@@ -48,6 +48,19 @@
 
 /release/*
 !/release/article1/
+!/release/propositional/
+
+/release/propositional/*
+!/release/propositional/README.md
+!/release/propositional/skeleton-data.json
+!/release/propositional/basis.json
+!/release/propositional/gate.json
+!/release/propositional/grow.py
+!/release/propositional/bank.py
+!/release/propositional/verify.py
+!/release/propositional/traces/
+/release/propositional/traces/*
+!/release/propositional/traces/*.trace.gz
 
 /release/article1/*
 !/release/article1/README.md

@@ -1,23 +1,32 @@
 # Certified Proof Skeleton
 
-This repository contains the main native experiment for certified cumulative
-proof growth. The method keeps a reusable library and a bounded search interface,
-retains certificates for inactive support, and measures how the resulting
-structure supports further growth.
+A goal-free constructor starts from three axioms of classical propositional
+logic and selects proved schemata for reuse. Its primary finite skeleton
+contains **10 anchors** whose certificates share **27 inference steps**.
 
-The current native method combines cumulative construction, a learned half-gate
-where its syntax supports that model, deferred replay, reversible premise pruning,
-a positive-marginal-gain proof codec, and a fixed structural rule repertoire.
-It distinguishes permission to search with a statement from the certificate
-support needed to justify it. The registered comparison did not establish an
-advantage for source-adaptive rule selection; that selector does not enter the
-recommended configuration.
+## Reproduce the propositional skeleton
 
-## Start here
+The release includes the constructor, frozen banks, growth traces for both
+generators, and external proof graphs. To regenerate all 16 banks and check
+the published proof scores, run this command from the repository root.
 
-- [Code, dependencies, tests, and reproduction boundaries](docs/ARTICLE1_REPRODUCIBILITY.md)
-- [Compact checked results and provenance](release/article1/README.md)
-- [Shortened manuscript, supporting appendices, and untouched full source](release/article1/manuscript/README.md)
+```sh
+python3 release/propositional/verify.py --reselect
+```
+
+- [Algorithm, primary skeleton, experimental conditions, and a fresh growth example](release/propositional/README.md)
+- [Frozen schemata, certificates, and proof-level results](release/propositional/skeleton-data.json)
+- [Online and terminal anchor selection](hpc/article1_skeleton/fragment_policy.py)
+
+## Earlier native continuation study
+
+The previous study examines how active premises support subsequent growth on
+a broader native basis. Its frozen protocol uses the historical compression
+selector and a fixed structural rule repertoire.
+
+- [Native workflow and reproduction guide](docs/ARTICLE1_REPRODUCIBILITY.md)
+- [Audited continuation and network results](release/article1/README.md)
+- [Archived manuscript and supporting appendices](release/article1/manuscript/README.md)
 
 ## Code map
 
@@ -31,11 +40,8 @@ recommended configuration.
 | `tests/` | Self-contained checks and separately marked integration tests |
 | `release/article1/` | Compact checked results and provenance |
 
-Only the main native workflow forms the supported experiment interface. Shared
-modules remain as its dependencies, not as separate experiment launchers. All
-five registered comparison arms remain: `core`, `fixed`, `random`, `adaptive`,
-and `fixed_all`. This focused release excludes shell launchers, earlier study
-drivers and graph-analysis tooling.
+The historical comparison includes five arms: `core`, `fixed`, `random`,
+`adaptive`, and `fixed_all`.
 
 ## Install and test
 
@@ -59,7 +65,7 @@ explicitly only after supplying those inputs:
 python -m pytest -q -m integration
 ```
 
-A source-only checkout cannot reproduce the complete historical experiment:
+Replaying the earlier native continuation experiment requires additional inputs:
 the full raw archive, trained gate, inherited library, and platform-specific
 verifier require separate provision. Compact results do not replace those inputs.
 
@@ -70,8 +76,8 @@ cluster jobs.
 
 ## Repository boundaries
 
-Generated outputs, raw trajectories, local agent worktrees, caches, private
-research notes and submission-system materials remain outside Git.
+The propositional release includes the frozen input traces for its replay.
+Local research notes, caches, and submission-system materials stay outside Git.
 This repository starts from a clean source snapshot on `main`. The original
 working copy, earlier Git history, and frozen experimental records remain in the
 local research archive. Historical presentations, research diaries, and obsolete

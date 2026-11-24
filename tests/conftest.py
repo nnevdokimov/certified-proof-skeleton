@@ -34,6 +34,13 @@ SOURCE_ONLY = {
     },
     "test_native_cumulative_policy.py": {
         "test_propositional_adapter_never_erases_quantifiers_or_types",
+        "test_transfer_retains_early_evidence_after_many_unrelated_proofs",
+        "test_transfer_counts_distinct_proofs_and_excludes_own_root",
+        "test_bank_stops_at_coverage_saturation_and_respects_an_explicit_cap",
+        "test_compact_frontier_preserves_direct_evidence_after_root_coverage",
+        "test_compact_frontier_keeps_ties_and_deduplicates_repeated_parent",
+        "test_frozen_bank_matches_used_instances_and_respects_source_side_conditions",
+        "test_frozen_claim_cannot_match_another_variable_sort",
     },
     "test_native_rule_synthesis.py": {
         "test_partitions_do_not_duplicate_boundary_equalities",

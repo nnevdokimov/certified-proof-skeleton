@@ -1,7 +1,8 @@
 """Typed adapter for the accumulated single-search mechanisms, NOT a new prover.
 
-Reuse unchanged: OpportunityQueue, exact closed-fragment coding/selection,
-delayed Portfolio, and the existing learned-half gate on its supported syntax.
+Proof coverage selects a bank from the certified archive. Historical runs can
+select fragments by tree compression. Both use the same native proof rules,
+delayed Portfolio, and learned-half gate on its supported syntax.
 Native MP, Gen, types, canonicalisation and $d stay in the existing native kernel.
 
 The frozen propositional model sees only pure implication/negation/wff terms;
@@ -9,6 +10,7 @@ predicate/ZFC pairs use declared intrinsic fallback features. No claim of
 validated transfer of the old model to ZFC follows from this adapter.
 """
 from collections import Counter
+from dataclasses import asdict, dataclass
 import math
 import random
 import sys
@@ -20,11 +22,12 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 sys.path[:0] = [str(HERE), str(ROOT / 'src')]
 from deferred_gate import OpportunityQueue
-from fragment_policy import select_fragments, future_savings
+from fragment_policy import ProofCoverage, future_savings, select_fragments
 from adaptive_policy import Portfolio, ACTIONS
 from skeleton_gate import describe, pair_features, score, choose_indices
 from metamath_native.online_skeleton import OnlineGrowth
 from metamath_native.online_skeleton import profile_loss
+from metamath_native.terms import sort
 
 
 def propositional_term(t):
@@ -44,21 +47,64 @@ def fragment_records(lib):
             for n in lib.nodes}
 
 
+@dataclass(frozen=True)
+class SearchSchedule:
+    """Work per search cycle and lifetime of active premises, in blocks."""
+    replay_every: int = 4         # measured in pair opportunities
+    refresh_every: int = 4        # measured in completed blocks
+    lease_blocks: int = 6
+    reactivation_delay: int = 2
+    replay_scan: int = 64
+    reservation_scan: int = 256
+
+    def __post_init__(self):
+        if any(type(x) is not int or x < 1 for x in asdict(self).values()):
+            raise ValueError('Positive integer search schedule required')
+
+
+DEFAULT_ACTIVE_CAP = 128
+DEFAULT_QUEUE_CAP = 32768
+DEFAULT_ROT_PATIENCE = 8
+# Frozen parameters of the published compression control.
+HISTORICAL_SLOTS = 4
+HISTORICAL_ROOT_WINDOW = 128
+HISTORICAL_SHORTLIST = 16
+
+
 class CumulativeGrowth(OnlineGrowth):
     def __init__(self, lib, config, seed, *, model, fragments=True,
-                 controller='half_replay', active_cap=128, queue_cap=32768,
-                 rot_patience=8, fragment_slots=4, gate=True):
-        if min(active_cap, queue_cap, rot_patience) < 1 or fragment_slots > active_cap or fragment_slots < 0:
+                 controller='half_replay', active_cap=DEFAULT_ACTIVE_CAP, queue_cap=DEFAULT_QUEUE_CAP,
+                 rot_patience=DEFAULT_ROT_PATIENCE, fragment_slots=None, gate=True, fragment_selection='transfer',
+                 schedule=None):
+        if (type(rot_patience) is not int or rot_patience < 1
+                or any(cap is not None and (type(cap) is not int or cap < 1)
+                       for cap in (active_cap, queue_cap))
+                or (fragment_slots is not None and (type(fragment_slots) is not int or fragment_slots < 0))):
             raise ValueError('Invalid accumulated-mechanism bounds')
+        if fragment_selection not in ('compression', 'transfer'):
+            raise ValueError('Unknown fragment selection objective: ' + str(fragment_selection))
         super().__init__(lib, config, seed)
         self.roots = {n.id for n in lib.nodes if not n.parents}
         self.live = set(range(len(lib.nodes)))
         self.active_cap, self.rot_patience = active_cap, rot_patience
-        self.fragment_slots, self.fragments_enabled = fragment_slots, fragments
+        self.schedule = schedule if schedule is not None else SearchSchedule()
+        self.bank_limit = fragment_slots
+        if fragment_selection == 'compression':
+            if self.bank_limit is None:
+                self.bank_limit = HISTORICAL_SLOTS if active_cap is None else min(HISTORICAL_SLOTS, active_cap)
+            elif active_cap is not None and self.bank_limit > active_cap:
+                raise ValueError('Historical compression slots must fit the shared active set')
+        # Slot-based extensions reserve working premises. Persistent bank
+        # membership has its own budget and may exceed working capacity.
+        budgets = [cap for cap in (active_cap, self.bank_limit) if cap is not None]
+        self.fragment_slots = min(budgets, default=None)
+        self.fragments_enabled = fragments
+        self.fragment_selection = fragment_selection
+        self.proof_coverage = ProofCoverage() if fragments and fragment_selection == 'transfer' else None
         self.gate_enabled = gate
         self.model = model
         self.queue = OpportunityQueue(queue_cap)
-        self.portfolio = Portfolio(controller, seed, block=8, delay=32)
+        self.portfolio = Portfolio(controller, seed)
         self.gate_rng = random.Random(seed + 99173)
         self.block_id = 0; self.retired = {}; self.last_use = Counter()
         self.activated = Counter({i: 0 for i in self.live})
@@ -82,6 +128,8 @@ class CumulativeGrowth(OnlineGrowth):
         return sorted(self.live)
 
     def _enforce_cap(self):
+        if self.active_cap is None:
+            return
         excess = len(self.live - self.roots) - self.active_cap
         if excess <= 0:
             return
@@ -120,8 +168,8 @@ class CumulativeGrowth(OnlineGrowth):
 
     def choose_pair(self, mode):
         gate, fraction, quota = ACTIONS[self.current_action]
-        if quota and self.counts['opportunities'] % 4 == 0:
-            for pair in self.queue.pop_ready(self.live, 1, 64):
+        if quota and self.counts['opportunities'] % self.schedule.replay_every == 0:
+            for pair in self.queue.pop_ready(self.live, 1, self.schedule.replay_scan):
                 if pair not in self.seen_pairs:
                     self.lifecycle['replay_attempts'] += 1
                     return pair
@@ -146,7 +194,7 @@ class CumulativeGrowth(OnlineGrowth):
         scores = [self._pair_score(*p) for p in pairs]
         if not self.gate_enabled:
             fraction = 1.
-        kept = choose_indices(scores, fraction, self.gate_rng, exploration=.125)
+        kept = choose_indices(scores, fraction, self.gate_rng)
         selected = kept[int(self.rng.integers(len(kept)))]
         for i, pair in enumerate(pairs):
             if i != selected:
@@ -167,13 +215,22 @@ class CumulativeGrowth(OnlineGrowth):
             self.live.remove(i); self.retired[i] = block
         self.lifecycle['rot_retired'] += len(victims)
         _, _, quota = ACTIONS[self.current_action]
-        reserved = self.queue.reservations(self.live, self.retired, block, 2, 4) if quota else []
-        shared = list(dict.fromkeys(sorted(self.fragment_library) + reserved))[:self.fragment_slots]
+        delay = self.schedule.reactivation_delay
+        replay_slots = (HISTORICAL_SLOTS if self.fragment_selection == 'compression' else
+                        math.ceil(self.config.block / self.schedule.replay_every))
+        reserved = self.queue.reservations(self.live, self.retired, block, delay, replay_slots,
+                                           scan=self.schedule.reservation_scan) if quota else []
+        shared = list(dict.fromkeys(sorted(self.fragment_library) + reserved))
+        if self.fragment_selection == 'compression':
+            shared = shared[:self.fragment_slots]
+        elif self.active_cap is not None and len(shared) > self.active_cap:
+            start = ((block - 1) * self.active_cap) % len(shared)
+            shared = (shared[start:] + shared[:start])[:self.active_cap]
         for i in shared:
-            if i in self.live or block - self.retired.get(i, -100000) < 2:
+            if i in self.live or block - self.retired.get(i, -delay) < delay:
                 continue
             self.live.add(i); self.activated[i] = block
-            self.leased_until[i] = block + 6
+            self.leased_until[i] = block + self.schedule.lease_blocks
             self.lifecycle['reactivated'] += 1
         self._enforce_cap()
         self.frozen_fragments = list(self.fragment_library)
@@ -194,13 +251,19 @@ class CumulativeGrowth(OnlineGrowth):
         records = fragment_records(self.lib)
         future = future_savings(records, range(first_new, len(self.lib.nodes)), self.frozen_fragments)
         self.future_reports.append(dict(block=block, **future))
-        if self.fragments_enabled and block % 4 == 0:
-            roots = [n.id for n in self.lib.nodes if n.parents][-128:]
-            chosen, report = select_fragments(records, roots, self.fragment_slots, 16)
+        if self.fragments_enabled and block % self.schedule.refresh_every == 0:
+            if self.proof_coverage is not None:
+                self.proof_coverage.update(records)
+                chosen, report = self.proof_coverage.select(self.bank_limit)
+                gain_field = 'marginal_votes'
+            else:
+                roots = [n.id for n in self.lib.nodes if n.parents][-HISTORICAL_ROOT_WINDOW:]
+                chosen, report = select_fragments(records, roots, self.fragment_slots, HISTORICAL_SHORTLIST)
+                gain_field = 'marginal_saved_symbols'
             self.fragment_library = chosen
-            self.fragment_gains = {x['root']: x['marginal_saved_symbols'] for x in report['trace']}
+            self.fragment_gains = {row['root']: row[gain_field] for row in report['trace']}
             for i in chosen:
-                self.leased_until[i] = block + 6
+                self.leased_until[i] = block + self.schedule.lease_blocks
             self.fragment_reports.append(dict(block=block, chosen=chosen, report=report))
         self.portfolio.after(block, self.counts['mp_calls'] + self.counts['gen_calls'])
         self.snapshots.append(dict(block=block, live=sorted(self.live),
@@ -212,14 +275,24 @@ class CumulativeGrowth(OnlineGrowth):
         result['accumulated'] = dict(
             lifecycle=dict(self.lifecycle), deferred=self.queue.summary(),
             controller=self.portfolio.export(), active_cap=self.active_cap,
+            fragment_selection=self.fragment_selection,
+            fragment_bank_limit=self.bank_limit, search_schedule=asdict(self.schedule),
             active_final=sorted(self.live), fragment_library=self.fragment_library,
             fragment_reports=self.fragment_reports, future_reports=self.future_reports,
             snapshots=self.snapshots,
             reused_unchanged=['deferred_gate.OpportunityQueue', 'skeleton_gate.choose_indices',
                               'skeleton_gate.describe/pair_features/score on supported propositional pairs',
-                              'fragment_policy.select_fragments/future_savings', 'adaptive_policy.Portfolio'],
+                              ('fragment_policy.ProofCoverage/future_savings'
+                               if self.fragment_selection == 'transfer'
+                               else 'fragment_policy.select_fragments/future_savings'), 'adaptive_policy.Portfolio'],
             new_adapter='Typed native lifecycle and pre-inference integration; its efficiency needs a new test',
             mathematical_contract='All admitted nodes retain native certificates and $d. Deactivation does not erase knowledge.',
             exclusions=['No external theorem targets or human labels', 'No multi-island restart or hard phase switch',
                         'No claim that old propositional model has validated ZFC transfer'])
+        if self.proof_coverage is not None:
+            bank, report = self.proof_coverage.freeze(
+                fragment_records(self.lib), self.bank_limit, sort_of=sort,
+                restricted=(n.id for n in self.lib.nodes if n.disjoint))
+            result['accumulated']['transfer_bank'] = bank
+            result['accumulated']['transfer_report'] = report
         return result, trajectory

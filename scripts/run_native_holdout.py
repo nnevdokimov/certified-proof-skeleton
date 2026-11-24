@@ -309,7 +309,7 @@ def build_source(run, protocol, seed, block):
     model = json.loads((run/'inputs/model.json').read_text())
     cfg = OnlineConfig(attempts=protocol['source_attempts'],
         max_nodes=len(lib.nodes)+protocol['source_attempts']+1, proof_height=256)
-    engine = CumulativeGrowth(lib, cfg, seed, model=model)
+    engine = CumulativeGrowth(lib, cfg, seed, model=model, fragment_selection='compression')
     result, _ = engine.run(policy='uniform')
     dictionary, codec = compress_above(fragment_records(lib),
         [n.id for n in lib.nodes if n.parents], engine.fragment_library)

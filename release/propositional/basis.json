@@ -1,0 +1,178 @@
+[
+  {
+    "disjoint": [],
+    "essentials": [
+      [
+        "min",
+        [
+          "|-",
+          "ph"
+        ]
+      ],
+      [
+        "maj",
+        [
+          "|-",
+          "(",
+          "ph",
+          "->",
+          "ps",
+          ")"
+        ]
+      ]
+    ],
+    "expression": [
+      "|-",
+      "ps"
+    ],
+    "floats": [
+      [
+        "wph",
+        [
+          "wff",
+          "ph"
+        ]
+      ],
+      [
+        "wps",
+        [
+          "wff",
+          "ps"
+        ]
+      ]
+    ],
+    "kind": "logical",
+    "label": "ax-mp"
+  },
+  {
+    "disjoint": [],
+    "essentials": [],
+    "expression": [
+      "|-",
+      "(",
+      "ph",
+      "->",
+      "(",
+      "ps",
+      "->",
+      "ph",
+      ")",
+      ")"
+    ],
+    "floats": [
+      [
+        "wph",
+        [
+          "wff",
+          "ph"
+        ]
+      ],
+      [
+        "wps",
+        [
+          "wff",
+          "ps"
+        ]
+      ]
+    ],
+    "kind": "logical",
+    "label": "ax-1"
+  },
+  {
+    "disjoint": [],
+    "essentials": [],
+    "expression": [
+      "|-",
+      "(",
+      "(",
+      "ph",
+      "->",
+      "(",
+      "ps",
+      "->",
+      "ch",
+      ")",
+      ")",
+      "->",
+      "(",
+      "(",
+      "ph",
+      "->",
+      "ps",
+      ")",
+      "->",
+      "(",
+      "ph",
+      "->",
+      "ch",
+      ")",
+      ")",
+      ")"
+    ],
+    "floats": [
+      [
+        "wph",
+        [
+          "wff",
+          "ph"
+        ]
+      ],
+      [
+        "wps",
+        [
+          "wff",
+          "ps"
+        ]
+      ],
+      [
+        "wch",
+        [
+          "wff",
+          "ch"
+        ]
+      ]
+    ],
+    "kind": "logical",
+    "label": "ax-2"
+  },
+  {
+    "disjoint": [],
+    "essentials": [],
+    "expression": [
+      "|-",
+      "(",
+      "(",
+      "-.",
+      "ph",
+      "->",
+      "-.",
+      "ps",
+      ")",
+      "->",
+      "(",
+      "ps",
+      "->",
+      "ph",
+      ")",
+      ")"
+    ],
+    "floats": [
+      [
+        "wph",
+        [
+          "wff",
+          "ph"
+        ]
+      ],
+      [
+        "wps",
+        [
+          "wff",
+          "ps"
+        ]
+      ]
+    ],
+    "kind": "logical",
+    "label": "ax-3"
+  }
+]
